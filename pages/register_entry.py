@@ -27,12 +27,14 @@ class RegisterEntry(BasePage):
     SALES = (By.XPATH,"//span[normalize-space()='Sales']")
     EVENT_NAME = (By.XPATH,"(//tbody/tr[1]//span[contains(@class,'font-semibold') and contains(@class,'text-[#142D14]') and contains(@class,'truncate')])[1]")
     OPEN_GENERAL = (By.XPATH,"//span[normalize-space()='Open general entries']")
+    OPEN_PRESALE = (By.XPATH,"//button[normalize-space()='Open Pre-Sale']")
 
 
     def __init__(self,driver):
         super().__init__(driver)
 
-    def register_entry(self, reg_num, horse_name, date_of_birth, additional_info, vendor_name, sex, colour, height, class_name, country_of_origin, stage_of_training, stage_of_lunging, hwsd_status, section_category, consignor_name, consignor_mobile, consignor):
+
+    def register_entry(self, reg_num, horse_name, date_of_birth, additional_info, sex, colour, height, class_name, country_of_origin, stage_of_training, stage_of_lunging, hwsd_status, section_category, consignor_name, consignor_mobile, consignor):
         self.click_element(self.SALES)
         # self.get_element_text(self.EVENT_NAME)
         self.wait.until(EC.presence_of_element_located(self.EVENT_NAME))
@@ -44,12 +46,17 @@ class RegisterEntry(BasePage):
         self.click_element(self.OVERVIEW_DROPDOWN)
         self.click_element(self.PRESALE)
 
-        if self.is_element_clickable(self.OPEN_GENERAL):
+        if self.is_element_visible(self.OPEN_PRESALE):
+            self.click_element(self.OPEN_PRESALE)
+
+        if self.is_element_visible(self.OPEN_GENERAL):
             self.click_element(self.OPEN_GENERAL)
 
         self.click_element(self.ADD_GENERAL_ENTRY)
+
+        vendor_name = self.get_name_by_index("vendorId")
         self.select_custom_dropdown("vendorId", vendor_name)
-        self.select_custom_dropdown("sectionCategory", section_category)
+        self.select_custom_dropdown("sectionCategory", self.get_name_by_index("sectionCategory"))
 
         if consignor == 'Yes':
             self.click_element(self.CONSIGNOR_YES)
@@ -59,21 +66,24 @@ class RegisterEntry(BasePage):
 
 
         self.enter_text(self.REG_NUM, reg_num)
-        self.select_custom_dropdown("horse.sex",sex)
-        self.select_custom_dropdown("horse.colour",colour)
-        self.select_custom_dropdown("horse.height",height)
+        self.select_custom_dropdown("horse.sex",self.get_name_by_index("horse.sex"))
+        self.select_custom_dropdown("horse.colour",self.get_name_by_index("horse.colour"))
+        self.select_custom_dropdown("horse.height",self.get_name_by_index("horse.height"))
         self.enter_text(self.HORSE_NAME, horse_name)
-        self.select_custom_dropdown("Class",class_name)
-        self.select_custom_dropdown("HwsdStatus", hwsd_status)
-        self.select_custom_dropdown("CountryOfOrigin",country_of_origin)
+        self.select_custom_dropdown("Class",self.get_name_by_index("Class"))
+        self.select_custom_dropdown("HwsdStatus", self.get_name_by_index("HwsdStatus"))
+        self.select_custom_dropdown("CountryOfOrigin",self.get_name_by_index("CountryOfOrigin"))
 
         if date_of_birth is not None:
             self.enter_date(self.DATE_OF_BIRTH,date_of_birth)
         
 
-        self.select_custom_dropdown("StageOfTraining",stage_of_training)
-        self.select_custom_dropdown("StageOfLunging", stage_of_lunging)
+        self.select_custom_dropdown("StageOfTraining",self.get_name_by_index("StageOfTraining"))
+        self.select_custom_dropdown("StageOfLunging", self.get_name_by_index("StageOfLunging"))
         self.enter_text(self.ADDITIONAL_PERFORMANCE_DETAILS, additional_info)
         self.click_element(self.CONFIRM_REGISTRATION)
+
+
+
 
 

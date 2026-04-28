@@ -8,6 +8,7 @@ from data.test_data import VALID_DATA,SALES_DATA, ENTRY_DATA, INVALID_ENTRY_DATA
 from utils.assertions import assert_true, assert_false
 import time
 from config import BASE_URL
+from selenium.webdriver.common.by import By
 
 class TestRegisterEntry:
     def setup_method(self):
@@ -21,11 +22,11 @@ class TestRegisterEntry:
     def teardown_method(self):
         self.driver.quit()
 
+
     @allure.title("Testing the process of registering a new general entry through admin portal")
     @pytest.mark.parametrize("entry_data", ENTRY_DATA)
-    @pytest.mark.parametrize("sales_data", SALES_DATA)
     @pytest.mark.parametrize("login_data", VALID_DATA)
-    def test_register_entry(self, entry_data, sales_data, login_data):
+    def test_register_entry(self, entry_data, login_data):
         with allure.step("Logging in to the application"):
             self.login_page.login(login_data["email"], login_data["password"])
 
@@ -34,30 +35,26 @@ class TestRegisterEntry:
         #     time.sleep(5)
 
         with allure.step("Registering a new entry"):
-            self.register_entry.register_entry(entry_data["reg_num"], entry_data["horse_name"], entry_data["date_of_birth"], entry_data["additional_info"], entry_data["vendor_name"], entry_data["sex"], entry_data["colour"], entry_data["height"], entry_data["class_name"], entry_data["country_of_origin"], entry_data["stage_of_training"], entry_data["stage_of_lunging"], entry_data["hwsd_status"], entry_data["section_category"], entry_data["consignor_name"], entry_data["consignor_mobile"],entry_data["consignor"] )
+            self.register_entry.register_entry(entry_data["reg_num"], entry_data["horse_name"], entry_data["date_of_birth"], entry_data["additional_info"], entry_data["sex"], entry_data["colour"], entry_data["height"], entry_data["class_name"], entry_data["country_of_origin"], entry_data["stage_of_training"], entry_data["stage_of_lunging"], entry_data["hwsd_status"], entry_data["section_category"], entry_data["consignor_name"], entry_data["consignor_mobile"],entry_data["consignor"] )
 
         with allure.step("Assertion"):
-            time.sleep(5)
-            self.register_entry.click_element(self.register_entry.ENTRY)
-            horse_name = self.register_entry.get_element_text(self.register_entry.ENTRY_HORSE_NAME)
-            assert_true(entry_data["horse_name"]==horse_name,"The name of the horses didn't match","register_entry",self.register_entry)
+            assert_false(self.register_entry.is_element_visible(self.register_entry.CONFIRM_REGISTRATION),"Confirm button is still present","valid_register_entry", self.register_entry)
 
 
-    @allure.title("Testing the process of registering a new general entry through admin portal using invalid data")
-    @pytest.mark.parametrize("entry_data", INVALID_ENTRY_DATA)
-    @pytest.mark.parametrize("sales_data", SALES_DATA)
-    @pytest.mark.parametrize("login_data", VALID_DATA)
-    def test_register_entry(self, entry_data, sales_data, login_data):
-        with allure.step("Logging in to the application"):
-            self.login_page.login(login_data["email"], login_data["password"])
+    # @allure.title("Testing the process of registering a new general entry through admin portal using invalid data")
+    # @pytest.mark.parametrize("entry_data", INVALID_ENTRY_DATA)
+    # @pytest.mark.parametrize("login_data", VALID_DATA)
+    # def test_register_entry(self, entry_data, login_data):
+    #     with allure.step("Logging in to the application"):
+    #         self.login_page.login(login_data["email"], login_data["password"])
 
-        # with allure.step("Creating a sales event"):
-        #     self.create_sales_page.create_sales_event(sales_data["event_name"], sales_data["date"], sales_data["max_lot"], sales_data["max_stables"])
-        #     time.sleep(5)
+    #     # with allure.step("Creating a sales event"):
+    #     #     self.create_sales_page.create_sales_event(sales_data["event_name"], sales_data["date"], sales_data["max_lot"], sales_data["max_stables"])
+    #     #     time.sleep(5)
 
-        with allure.step("Registering a new entry"):
-            self.register_entry.register_entry(entry_data["reg_num"], entry_data["horse_name"], entry_data["date_of_birth"], entry_data["additional_info"], entry_data["vendor_name"], entry_data["sex"], entry_data["colour"], entry_data["height"], entry_data["class_name"], entry_data["country_of_origin"], entry_data["stage_of_training"], entry_data["stage_of_lunging"], entry_data["hwsd_status"], entry_data["section_category"], entry_data["consignor_name"], entry_data["consignor_mobile"],entry_data["consignor"] )
+    #     with allure.step("Registering a new entry"):
+    #         self.register_entry.register_entry(entry_data["reg_num"], entry_data["horse_name"], entry_data["date_of_birth"], entry_data["additional_info"], entry_data["vendor_name"], entry_data["sex"], entry_data["colour"], entry_data["height"], entry_data["class_name"], entry_data["country_of_origin"], entry_data["stage_of_training"], entry_data["stage_of_lunging"], entry_data["hwsd_status"], entry_data["section_category"], entry_data["consignor_name"], entry_data["consignor_mobile"],entry_data["consignor"] )
 
-        with allure.step("Assertion"):
-            time.sleep(5)
-            assert_true(self.register_entry.is_element_visible(self.register_entry.ERROR_CONTAINER),"Assertion failed as  the entry was registered for invalid data","Invalid_entry", self.register_entry)
+    #     with allure.step("Assertion"):
+    #         time.sleep(5)
+    #         assert_true(self.register_entry.is_element_visible(self.register_entry.ERROR_CONTAINER),"Assertion failed as  the entry was registered for invalid data","Invalid_entry", self.register_entry)

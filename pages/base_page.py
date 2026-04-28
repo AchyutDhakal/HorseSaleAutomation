@@ -133,3 +133,21 @@ class BasePage:
             arguments[0].dispatchEvent(new Event('change', {bubbles: true}));
             arguments[0].dispatchEvent(new Event('input', {bubbles: true}));
         """, select_el, value)
+
+
+    def get_name_by_index(self, name, index=0):
+        self.wait.until(
+            lambda d: len(d.find_element(By.NAME, name).find_elements(By.TAG_NAME, "option")) > 1
+        )
+        select_element = self.find_element((By.NAME, name))
+        return self.driver.execute_script("""
+            var options = Array.from(arguments[0].options).filter(o => o.value !== '');
+            if (options.length === 0) return null;
+            return options[arguments[1]].text.trim();
+        """, select_element, index)
+    
+    def enter_otp(self, locator, otp):
+        otp_inputs = self.driver.find_elements(*locator)
+        for i, digit in enumerate(str(otp)):
+            otp_inputs[i].click()
+            otp_inputs[i].send_keys(digit)

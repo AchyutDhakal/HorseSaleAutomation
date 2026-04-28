@@ -6,6 +6,7 @@ today = datetime.today().strftime('%Y-%m-%d')
 future_date = (datetime.today() + timedelta(days=7)).strftime('%Y-%m-%d')
 past_date = (datetime.today() - timedelta(days=30)).strftime('%Y-%m-%d')
 
+
 VALID_DATA = [
     {
         "email": ADMIN_EMAIL,
@@ -47,7 +48,6 @@ ENTRY_DATA = [
         "horse_name":"testHorse",
         "date_of_birth": past_date,
         "additional_info":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tincidunt tincidunt lectus vel tempus. Aliquam dictum ligula dapibus, feugiat quam id, consequat ex. Proin ipsum tellus, maximus quis aliquet ac, venenatis ac lacus. Sed vel vulputate metus, vel malesuada sapien. Pellentesque tincidunt vel.",
-        "vendor_name":"Mr. Steven Dillon",
         "sex":"Colt",
         "colour":"Gray",
         "height":"12.2h - 128cm",
