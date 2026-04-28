@@ -51,9 +51,9 @@ class TestRegisterEntry:
         with allure.step("Logging in to the application"):
             self.login_page.login(login_data["email"], login_data["password"])
 
-        with allure.step("Creating a sales event"):
-            self.create_sales_page.create_sales_event(sales_data["event_name"], sales_data["date"], sales_data["max_lot"], sales_data["max_stables"])
-            time.sleep(5)
+        # with allure.step("Creating a sales event"):
+        #     self.create_sales_page.create_sales_event(sales_data["event_name"], sales_data["date"], sales_data["max_lot"], sales_data["max_stables"])
+        #     time.sleep(5)
 
         with allure.step("Registering a new entry"):
             self.register_entry.register_entry(entry_data["reg_num"], entry_data["horse_name"], entry_data["date_of_birth"], entry_data["additional_info"], entry_data["vendor_name"], entry_data["sex"], entry_data["colour"], entry_data["height"], entry_data["class_name"], entry_data["country_of_origin"], entry_data["stage_of_training"], entry_data["stage_of_lunging"], entry_data["hwsd_status"], entry_data["section_category"], entry_data["consignor_name"], entry_data["consignor_mobile"],entry_data["consignor"] )
