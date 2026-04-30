@@ -1,10 +1,16 @@
 from datetime import datetime, timedelta
-from config import ADMIN_EMAIL, ADMIN_PASSWORD
+from config import ADMIN_EMAIL, ADMIN_PASSWORD, EMAIL_ADDRESS, EMAIL_PASSWORD
 import time
+import os
 
 today = datetime.today().strftime('%Y-%m-%d')
 future_date = (datetime.today() + timedelta(days=7)).strftime('%Y-%m-%d')
 past_date = (datetime.today() - timedelta(days=30)).strftime('%Y-%m-%d')
+
+split_email = EMAIL_ADDRESS.split('@')
+split_email.insert(1,f"+{int(time.time())}@")
+email_address = "".join(split_email)
+
 
 
 VALID_DATA = [
@@ -481,5 +487,22 @@ INVALID_ENTRY_DATA =[
         "consignor_name": "Random Person",
         "consignor_mobile": "Laboris eu velit anim sint. Fugiat voluptate laborum sint officia eu aliquip duis duis labore dolor dolore id. Elit fugiat qui ea esse veniam incididunt commodo anim in occaecat. Dolor enim esse ad ut proident ullamco sit dolor culpa irure pariatur exercitation. Laboris culpa cillum sint veniam Lorem ea adipisicing in dolore commodo consectetur nostrud ad. Ipsum laboris in tempor adipisicing cupidatat elit qui exercitation nisi ea amet dolore id.",
         "consignor":"Yes"
+    }
+]
+
+
+VALID_PUBLIC_PORTAL = [
+    {
+        "email_address":email_address,
+        "mobile_number":9875487896,
+        "first_name":"Random",
+        "last_name":"Person",
+        "address":"kathmandu, Nepal",
+        "town":"Kathmandu",
+        "postcode":257489,
+        "eq_number":25466335,
+        "horse_name":"Random Horse",
+        "reg_number":369874512369,
+        "additional_performance":"Est exercitation aliqua eiusmod adipisicing cillum sunt ipsum proident fugiat laboris qui. Fugiat quis veniam aliqua officia aliqua qui do laborum Lorem. Anim Lorem anim ex esse enim labore dolor nisi fugiat. Nisi proident ea in anim aliqua irure do cupidatat minim proident aliquip occaecat. In reprehenderit aliqua non nostrud commodo ipsum excepteur labore nostrud nulla cupidatat elit ad. Commodo exercitation ullamco reprehenderit cillum aliquip occaecat mollit dolore non sit eiusmod eiusmod do."
     }
 ]

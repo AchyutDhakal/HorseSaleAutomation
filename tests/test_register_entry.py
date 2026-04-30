@@ -35,7 +35,7 @@ class TestRegisterEntry:
         #     time.sleep(5)
 
         with allure.step("Registering a new entry"):
-            self.register_entry.register_entry(entry_data["reg_num"], entry_data["horse_name"], entry_data["date_of_birth"], entry_data["additional_info"], entry_data["sex"], entry_data["colour"], entry_data["height"], entry_data["class_name"], entry_data["country_of_origin"], entry_data["stage_of_training"], entry_data["stage_of_lunging"], entry_data["hwsd_status"], entry_data["section_category"], entry_data["consignor_name"], entry_data["consignor_mobile"],entry_data["consignor"] )
+            self.register_entry.register_entry(entry_data["reg_num"], entry_data["horse_name"], entry_data["date_of_birth"], entry_data["additional_info"], entry_data["consignor_name"], entry_data["consignor_mobile"],entry_data["consignor"] )
 
         with allure.step("Assertion"):
             assert_false(self.register_entry.is_element_visible(self.register_entry.CONFIRM_REGISTRATION),"Confirm button is still present","valid_register_entry", self.register_entry)

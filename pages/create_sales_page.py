@@ -35,17 +35,6 @@ class CreateSalesPage(BasePage):
         super().__init__(driver)
 
 
-    def dismiss_popup_if_present(self):
-        try:
-            dismiss_btn = self.wait.until(
-                EC.element_to_be_clickable(self.POPUP_DISMISS_BUTTON)
-            )
-            dismiss_btn.click()
-            self.wait.WebDriverWait(self.driver, 5).until(
-               EC.invisibility_of_element_located(self.POPUP_OVERLAY)
-            )
-        except TimeoutException:
-            pass 
 
     def create_sales_event(self, event_name, date, max_lot, max_stables):
         self.dismiss_popup_if_present()

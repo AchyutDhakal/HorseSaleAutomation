@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from utils.otp_reader import get_otp_from_email
 import time
 from config import CARD_NUMBER, EXPIRY_MONTH, EXPIRY_YEAR, CVV
+from selenium.webdriver.support import expected_conditions as EC
 
 class PublicPortal(BasePage):
     ENTER_HORSE_BUTTON = (By.XPATH,"(//a[normalize-space()='Enter a Horse'])[2]")
@@ -16,7 +17,7 @@ class PublicPortal(BasePage):
     FORMAL_TITLE = (By.XPATH,"//button[normalize-space()='Mr.']")
     FIRST_NAME_INPUT = (By.XPATH,"//input[@placeholder='First name  ']")
     LAST_NAME_INPUT = (By.XPATH,"//input[@placeholder='Surname  ']")
-    ADDRESS_LINE_1_INPUT = (By.XPATH,"//input[@placeholder='Address line 1  ']")
+    ADDRESS_LINE_1_INPUT = (By.XPATH,"//input[@name='address.addressLine1']")
     TOWN_INPUT = (By.XPATH,"//input[@placeholder='Town / City  ']")
     COUNTY_DROPDOWN = (By.XPATH,"(//span[normalize-space()='Please select...'])[1]")
     COUNTY = (By.XPATH,"//button[normalize-space()='Carlow']")
@@ -46,25 +47,29 @@ class PublicPortal(BasePage):
     EMAIL_OTP_INPUTS = (By.XPATH, "//input[@inputmode='numeric' and @type='tel']")
     HEIGHT = "horses[0].horse.height"
     AGE = "horses[0].horse.age"
+    VERIFY_AND_CONTINUE_BUTTON = (By.ID,"verify-btn")
+    PAYMENT_WINDOW_LOCATOR = (By.XPATH,"//iframe")
+    RETURN_TO_HOMEPAGE_BUTTON = (By.XPATH,"//a[normalize-space()='Return to Homepage']")
+
 
 
     def __init__(self, driver):
         super().__init__(driver)
 
     def register_entry(self, email_address, mobile_number, first_name, last_name, address, town, postcode, eq_number, horse_name, reg_number, additional_performance):
+        # self.dismiss_popup_if_present()
         self.click_element(self.ENTER_HORSE_BUTTON)
 
         if(self.is_element_clickable(self.EVENT)==False):
             raise ValueError("No sales event available")
         
         else:
+            self.event_text = self.get_element_text(self.EVENT)
             self.click_element(self.EVENT)
 
         self.click_element(self.CONTINUE_BUTTON)
         self.enter_text(self.EMAIL_INPUT,email_address)
         self.click_element(self.CONTINUE_BUTTON)
-
-        time.sleep(20)
         self.enter_otp(self.EMAIL_OTP_INPUTS,get_otp_from_email())
         self.click_element(self.VERIFY_CODE_BUTTON)
         self.enter_text(self.MOBILE_NUMBER_INPUT, mobile_number)
@@ -84,13 +89,13 @@ class PublicPortal(BasePage):
         self.enter_text(self.EQUINE_PREMISES_NUMBER_INPUT, eq_number)
         self.click_element(self.NEXT_STEP_BUTTON)
         self.click_element(self.DOCUMENT_LATER)
-        self.select_custom_dropdown(self.get_name_by_index(self.SECTION_CATEGORY))
+        self.select_custom_dropdown(self.SECTION_CATEGORY, self.get_name_by_index(self.SECTION_CATEGORY))
         self.enter_text(self.HORSE_NAME, horse_name)
         self.enter_text(self.REG_NUMBER, reg_number)
-        self.select_custom_dropdown(self.get_name_by_index(self.SEX))
-        self.select_custom_dropdown(self.get_name_by_index(self.PRIMARY_COLOUR))
-        self.select_custom_dropdown(self.get_name_by_index(self.HEIGHT))
-        self.select_custom_dropdown(self.get_element_text(self.AGE))
+        self.select_custom_dropdown(self.SEX, self.get_name_by_index(self.SEX))
+        self.select_custom_dropdown(self.PRIMARY_COLOUR, self.get_name_by_index(self.PRIMARY_COLOUR))
+        self.select_custom_dropdown(self.HEIGHT, self.get_name_by_index(self.HEIGHT))
+        self.select_custom_dropdown(self.AGE, self.get_name_by_index(self.AGE))
         self.enter_text(self.ADDITIONAL_PERFORMANCE_DETAILS_INPUT, additional_performance)
         self.click_element(self.NEXT_STEP_BUTTON)
         self.click_element(self.NEXT_STEP_BUTTON)
@@ -101,6 +106,11 @@ class PublicPortal(BasePage):
         self.enter_text(self.EXPIRY_YEAR_INPUT, EXPIRY_YEAR)
         self.enter_text(self.CVV_INPUT, CVV)
         self.click_element(self.FINALIZE_ENTRY_BUTTON)
-        
+       
+        self.enter_3ds_otp()
+
+        self.wait.until(lambda d: self.is_element_visible(self.RETURN_TO_HOMEPAGE_BUTTON))
+            
+            
 
 

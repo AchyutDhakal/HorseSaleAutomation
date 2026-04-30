@@ -34,16 +34,19 @@ class BasePage:
     
     def enter_text(self, locator, text):
         element = self.find_element(locator)
-        self.driver.execute_script("arguments[0].value = '';", element)  
-        element.click()  
-        element.send_keys(text)  
+        # Scroll to center so sticky footer doesn't cover it
+        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
+        element.click()
+        element.clear()
+        element.send_keys(text)
 
     def click_element(self, locator):
         # self.wait_for_overlay_to_disappear()
         element = self.find_clickable_element(locator)
+        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
         # try:
         #     self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
-        element.click()
+        self.driver.execute_script("arguments[0].click();", element)
         # except ElementClickInterceptedException:
         #     # Another element is overlapping — wait briefly and try JS click
         #     self.wait.until(
@@ -151,3 +154,58 @@ class BasePage:
         for i, digit in enumerate(str(otp)):
             otp_inputs[i].click()
             otp_inputs[i].send_keys(digit)
+
+
+    def dismiss_popup_if_present(self):
+        try:
+            dismiss_btn = self.wait.until(
+                EC.element_to_be_clickable(self.POPUP_DISMISS_BUTTON)
+            )
+            dismiss_btn.click()
+            self.wait.WebDriverWait(self.driver, 5).until(
+               EC.invisibility_of_element_located(self.POPUP_OVERLAY)
+            )
+        except TimeoutException:
+            pass
+
+
+    def enter_3ds_otp(self, otp="123456"):
+        try:
+            # Wait for a visible iframe to appear
+            WebDriverWait(self.driver, 70).until(
+                lambda d: len([
+                    i for i in d.find_elements(By.TAG_NAME, "iframe")
+                    if i.is_displayed()
+                ]) > 0
+            )
+
+            # Get all visible iframes and switch to the first visible one
+            iframes = self.driver.find_elements(By.TAG_NAME, "iframe")
+            switched = False
+            for iframe in iframes:
+                if iframe.is_displayed():
+                    self.driver.switch_to.frame(iframe)  
+                    switched = True
+                    break
+
+            if not switched:
+                raise TimeoutException("No visible iframe found")
+
+        except TimeoutException:
+            self.take_screenshot("3ds_iframe_not_found")
+            raise TimeoutException("3DS iframe did not appear")
+
+        OTP_INPUT = (By.ID, "otp")
+        SUBMIT_BUTTON = (By.ID, "verify-btn")
+
+        WebDriverWait(self.driver, 15).until(
+            EC.presence_of_element_located(OTP_INPUT)
+        )
+        self.enter_text(OTP_INPUT, otp)
+
+        WebDriverWait(self.driver, 10).until(
+            EC.element_to_be_clickable(SUBMIT_BUTTON)
+        )
+        self.click_element(SUBMIT_BUTTON)
+
+        self.driver.switch_to.default_content()

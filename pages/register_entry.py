@@ -34,7 +34,8 @@ class RegisterEntry(BasePage):
         super().__init__(driver)
 
 
-    def register_entry(self, reg_num, horse_name, date_of_birth, additional_info, sex, colour, height, class_name, country_of_origin, stage_of_training, stage_of_lunging, hwsd_status, section_category, consignor_name, consignor_mobile, consignor):
+    def register_entry(self, reg_num, horse_name, date_of_birth, additional_info, consignor_name, consignor_mobile, consignor):
+        self.dismiss_popup_if_present()
         self.click_element(self.SALES)
         # self.get_element_text(self.EVENT_NAME)
         self.wait.until(EC.presence_of_element_located(self.EVENT_NAME))
