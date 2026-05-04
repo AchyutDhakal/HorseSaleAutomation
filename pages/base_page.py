@@ -98,6 +98,7 @@ class BasePage:
 
     def enter_date(self, locator, date):
         element = self.find_element(locator)
+        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
         element.click()
         element.send_keys(Keys.CONTROL + "a")
         element.send_keys(Keys.DELETE)
@@ -228,3 +229,13 @@ class BasePage:
         
         # Close dropdown by clicking outside
         self.driver.find_element(By.TAG_NAME, "body").click()
+
+
+    def handle_save_address_popup(self):
+        try:
+            popup_btn = WebDriverWait(self.driver, 5).until(
+                EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Save')]"))
+            )
+            popup_btn.click()
+        except:
+            pass  # popup didn't appear

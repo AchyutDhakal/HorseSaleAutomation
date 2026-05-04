@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class PublicPortal(BasePage):
     ENTER_HORSE_BUTTON = (By.XPATH,"(//a[normalize-space()='Enter a Horse'])[2]")
-    EVENT = (By.XPATH,"//button[.//span[contains(@class,'font-bold') and contains(@class,'text-[14px]')]][1]")
+    EVENT = (By.XPATH,"//button[.//span[contains(@class,'font-bold') and contains(@class,'text-[14px]')]][2]")
     CONTINUE_BUTTON =(By.XPATH,"//button[normalize-space()='Continue']")
     EMAIL_INPUT = (By.XPATH,"//input[@type='email']")
     VERIFY_CODE_BUTTON = (By.XPATH,"//button[normalize-space()='Verify code']")
@@ -50,21 +50,28 @@ class PublicPortal(BasePage):
     VERIFY_AND_CONTINUE_BUTTON = (By.ID,"verify-btn")
     PAYMENT_WINDOW_LOCATOR = (By.XPATH,"//iframe")
     RETURN_TO_HOMEPAGE_BUTTON = (By.XPATH,"//a[normalize-space()='Return to Homepage']")
+    ENTRY = (By.XPATH,"//table//tbody/tr[1]")
+    HORSE_NAME_ADMIN = (By.XPATH,"//table//tbody/tr[1]//td[6]//span[contains(@class,'font-semibold')]")
+    POPUP_DISMISS_BUTTON = (By.XPATH, "//button[normalize-space()='No thanks']")
+    POPUP_OVERLAY = (By.CSS_SELECTOR, "div.absolute.inset-0")
+    ENTRY_STATUS = (By.XPATH,"(//div[.//span[normalize-space()='Entry status']]//span[last()])[2]")
+
 
 
 
     def __init__(self, driver):
         super().__init__(driver)
 
-    def register_entry(self, email_address, mobile_number, first_name, last_name, address, town, postcode, eq_number, horse_name, reg_number, additional_performance):
-        # self.dismiss_popup_if_present()
+    def register_entry(self, email_address, mobile_number, first_name, last_name, address, town, postcode, eq_number, horse_name, reg_number, additional_performance, date_of_birth):
+        self.dismiss_popup_if_present()
         self.click_element(self.ENTER_HORSE_BUTTON)
 
         if(self.is_element_clickable(self.EVENT)==False):
             raise ValueError("No sales event available")
         
         else:
-            self.event_text = self.get_element_text(self.EVENT)
+            self.event_text = self.get_element_text(self.EVENT).splitlines()[0]
+            print(self.event_text)
             self.click_element(self.EVENT)
 
         self.click_element(self.CONTINUE_BUTTON)
@@ -89,6 +96,8 @@ class PublicPortal(BasePage):
         self.enter_text(self.EQUINE_PREMISES_NUMBER_INPUT, eq_number)
         self.click_element(self.NEXT_STEP_BUTTON)
         self.click_element(self.DOCUMENT_LATER)
+
+        self.handle_save_address_popup()
         self.select_custom_dropdown(self.SECTION_CATEGORY, self.get_name_by_index(self.SECTION_CATEGORY))
         self.enter_text(self.HORSE_NAME, horse_name)
         self.enter_text(self.REG_NUMBER, reg_number)
@@ -96,6 +105,12 @@ class PublicPortal(BasePage):
         self.select_custom_dropdown(self.PRIMARY_COLOUR, self.get_name_by_index(self.PRIMARY_COLOUR))
         self.select_custom_dropdown(self.HEIGHT, self.get_name_by_index(self.HEIGHT))
         self.select_custom_dropdown(self.AGE, self.get_name_by_index(self.AGE))
+        self.select_custom_dropdown("horses[0].horse.class", self.get_name_by_index("horses[0].horse.class"))
+        self.select_custom_dropdown("horses[0].horse.hwsdStatus", self.get_name_by_index("horses[0].horse.hwsdStatus"))
+        self.enter_date(self.DATE_OF_BIRTH, date_of_birth)
+        self.select_custom_dropdown("horses[0].horse.countryOfOrigin", self.get_name_by_index("horses[0].horse.countryOfOrigin"))
+        self.select_custom_dropdown("horses[0].horse.performance.stageOfTraining", self.get_name_by_index("horses[0].horse.performance.stageOfTraining"))
+        self.select_custom_dropdown("horses[0].horse.performance.stageOfLunging", self.get_name_by_index("horses[0].horse.performance.stageOfLunging"))
         self.enter_text(self.ADDITIONAL_PERFORMANCE_DETAILS_INPUT, additional_performance)
         self.click_element(self.NEXT_STEP_BUTTON)
         self.click_element(self.NEXT_STEP_BUTTON)
@@ -110,7 +125,7 @@ class PublicPortal(BasePage):
         self.enter_3ds_otp()
 
         self.wait.until(lambda d: self.is_element_visible(self.RETURN_TO_HOMEPAGE_BUTTON))
-        
+
             
             
 

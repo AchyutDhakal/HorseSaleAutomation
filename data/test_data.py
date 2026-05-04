@@ -501,8 +501,9 @@ VALID_PUBLIC_PORTAL = [
         "town":"Kathmandu",
         "postcode":257489,
         "eq_number":25466335,
-        "horse_name":"Random Horse",
+        "horse_name":f"Random Horse_{int(time.time())}",
         "reg_number":369874512369,
-        "additional_performance":"Est exercitation aliqua eiusmod adipisicing cillum sunt ipsum proident fugiat laboris qui. Fugiat quis veniam aliqua officia aliqua qui do laborum Lorem. Anim Lorem anim ex esse enim labore dolor nisi fugiat. Nisi proident ea in anim aliqua irure do cupidatat minim proident aliquip occaecat. In reprehenderit aliqua non nostrud commodo ipsum excepteur labore nostrud nulla cupidatat elit ad. Commodo exercitation ullamco reprehenderit cillum aliquip occaecat mollit dolore non sit eiusmod eiusmod do."
+        "additional_performance":"Est exercitation aliqua eiusmod adipisicing cillum sunt ipsum proident fugiat laboris qui. Fugiat quis veniam aliqua officia aliqua qui do laborum Lorem.",
+        "date_of_birth": past_date
     }
 ]
