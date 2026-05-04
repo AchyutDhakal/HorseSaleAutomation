@@ -110,6 +110,7 @@ class PublicPortal(BasePage):
         self.enter_3ds_otp()
 
         self.wait.until(lambda d: self.is_element_visible(self.RETURN_TO_HOMEPAGE_BUTTON))
+        
             
             
 

@@ -4,7 +4,8 @@ from pages.create_sales_page import CreateSalesPage
 import allure
 import pytest
 from data.test_data import VALID_DATA,SALES_DATA
-from utils.assertions import assert_true
+from utils.assertions import assert_true, assert_false
+import time
 
 class TestCreateSales:
     def setup_method(self):
@@ -29,5 +30,6 @@ class TestCreateSales:
 
         with allure.step("Assertion"):
             event_text = self.create_sales_page.get_element_text(self.create_sales_page.EVENT_TITLE).lower()
-            assert_true(sales_data["event_name"].lower()==event_text,"The name of the event didn't match","sales_event_creation", self.create_sales_page)
+            assert_true(sales_data["event_name"].lower()==event_text,"The name of the event didn't match","sales_event_creation", self.create_sales_page)  
+            assert_false(self.create_sales_page.is_element_present(self.create_sales_page.INITIALIZE_SALE),"Initialize sales button still present","sales_event_creation",self.create_sales_page)
         

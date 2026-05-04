@@ -42,4 +42,3 @@ class CreateSalesPage(BasePage):
         self.enter_text(self.MAX_STABLES, max_stables)
         self.click_element(self.SAVE_SCHEDULE)
         self.click_element(self.INITIALIZE_SALE)
-        self.wait.until(EC.presence_of_element_located(self.EVENT_TITLE))

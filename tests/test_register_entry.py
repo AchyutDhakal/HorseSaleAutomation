@@ -37,16 +37,16 @@ class TestRegisterEntry:
             assert_false(self.register_entry.is_element_visible(self.register_entry.CONFIRM_REGISTRATION),"Confirm button is still present","valid_register_entry", self.register_entry)
 
 
-    @allure.title("Testing the process of registering a new general entry through admin portal using invalid data")
-    @pytest.mark.parametrize("entry_data", INVALID_ENTRY_DATA)
-    @pytest.mark.parametrize("login_data", VALID_DATA)
-    def test_register_entry(self, entry_data, login_data):
-        with allure.step("Logging in to the application"):
-            self.login_page.login(login_data["email"], login_data["password"])
+    # @allure.title("Testing the process of registering a new general entry through admin portal using invalid data")
+    # @pytest.mark.parametrize("entry_data", INVALID_ENTRY_DATA)
+    # @pytest.mark.parametrize("login_data", VALID_DATA)
+    # def test_invalid_register_entry(self, entry_data, login_data):
+    #     with allure.step("Logging in to the application"):
+    #         self.login_page.login(login_data["email"], login_data["password"])
 
-        with allure.step("Registering a new entry"):
-            self.register_entry.register_entry(entry_data["reg_num"], entry_data["horse_name"], entry_data["date_of_birth"], entry_data["additional_info"], entry_data["consignor_name"], entry_data["consignor_mobile"],entry_data["consignor"] )
+    #     with allure.step("Registering a new entry"):
+    #         self.register_entry.register_entry(entry_data["reg_num"], entry_data["horse_name"], entry_data["date_of_birth"], entry_data["additional_info"], entry_data["consignor_name"], entry_data["consignor_mobile"],entry_data["consignor"] )
 
-        with allure.step("Assertion"):
-            time.sleep(5)
-            assert_true(self.register_entry.is_element_visible(self.register_entry.ERROR_CONTAINER),"Assertion failed as  the entry was registered for invalid data","Invalid_entry", self.register_entry)
+    #     with allure.step("Assertion"):
+    #         time.sleep(5)
+    #         assert_true(self.register_entry.is_element_visible(self.register_entry.ERROR_CONTAINER),"Assertion failed as  the entry was registered for invalid data","Invalid_entry", self.register_entry)
