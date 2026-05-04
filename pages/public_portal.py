@@ -55,7 +55,8 @@ class PublicPortal(BasePage):
     POPUP_DISMISS_BUTTON = (By.XPATH, "//button[normalize-space()='No thanks']")
     POPUP_OVERLAY = (By.CSS_SELECTOR, "div.absolute.inset-0")
     ENTRY_STATUS = (By.XPATH,"(//div[.//span[normalize-space()='Entry status']]//span[last()])[2]")
-
+    SEARCH_ENTRY = (By.XPATH,"//input[@placeholder='Search by Name, Lot#, or vendor...']")
+    SEARCH_EVENT = (By.XPATH,"//input[@placeholder='Search sales...']")
 
 
 

@@ -38,7 +38,7 @@ class TestPublicPortal:
 
         with allure.step("Going the sales event"):
             self.register_entry.click_element(self.register_entry.SALES)
-            print(f"//span[normalize-space()='{self.public_portal.event_text}']")
+            self.public_portal.enter_text(self.public_portal.SEARCH_EVENT, self.public_portal.event_text)
             EVENT_NAME = (By.XPATH,f"//span[normalize-space()='{self.public_portal.event_text}']")
             self.public_portal.click_element(EVENT_NAME)
             self.public_portal.click_element(self.register_entry.OVERVIEW_DROPDOWN)
