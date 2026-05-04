@@ -35,7 +35,6 @@ class RegisterEntry(BasePage):
 
 
     def register_entry(self, reg_num, horse_name, date_of_birth, additional_info, consignor_name, consignor_mobile, consignor):
-        self.dismiss_popup_if_present()
         self.click_element(self.SALES)
         # self.get_element_text(self.EVENT_NAME)
         self.wait.until(EC.presence_of_element_located(self.EVENT_NAME))

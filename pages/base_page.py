@@ -172,7 +172,7 @@ class BasePage:
     def enter_3ds_otp(self, otp="123456"):
         try:
             # Wait for a visible iframe to appear
-            WebDriverWait(self.driver, 70).until(
+            WebDriverWait(self.driver, 120).until(
                 lambda d: len([
                     i for i in d.find_elements(By.TAG_NAME, "iframe")
                     if i.is_displayed()
@@ -198,14 +198,33 @@ class BasePage:
         OTP_INPUT = (By.ID, "otp")
         SUBMIT_BUTTON = (By.ID, "verify-btn")
 
-        WebDriverWait(self.driver, 15).until(
+        self.wait.until(
             EC.presence_of_element_located(OTP_INPUT)
         )
         self.enter_text(OTP_INPUT, otp)
 
-        WebDriverWait(self.driver, 10).until(
+        self.wait.until(
             EC.element_to_be_clickable(SUBMIT_BUTTON)
         )
         self.click_element(SUBMIT_BUTTON)
 
         self.driver.switch_to.default_content()
+
+
+    def select_all_section_categories(self, dropdown_locator, options_locator):
+        # Open the dropdown first
+        self.click_element(dropdown_locator)
+        
+        # Wait for options to appear
+        self.wait.until(
+            EC.presence_of_element_located(options_locator)
+        )
+        
+        # Get all option divs and click each one
+        options = self.driver.find_elements(*options_locator)
+        for option in options:
+            self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", option)
+            option.click()
+        
+        # Close dropdown by clicking outside
+        self.driver.find_element(By.TAG_NAME, "body").click()

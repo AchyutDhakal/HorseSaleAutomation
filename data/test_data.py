@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from config import ADMIN_EMAIL, ADMIN_PASSWORD, EMAIL_ADDRESS, EMAIL_PASSWORD
+from config import ADMIN_EMAIL, ADMIN_PASSWORD, EMAIL_ADDRESS
 import time
 import os
 
