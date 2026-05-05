@@ -26,10 +26,10 @@ class TestCreateSales:
             self.login_page.login(valid_data["email"], valid_data["password"])
 
         with allure.step("Creating the sales event"):
-            self.create_sales_page.create_sales_event(sales_data["event_name"], sales_data["date"], sales_data["max_lot"], sales_data["max_stables"])
+            self.create_sales_page.create_sales_event(sales_data["event_name"], sales_data["date"], sales_data["max_lot"], sales_data["max_stables"], sales_data["entry_fee"])
 
         with allure.step("Assertion"):
             event_text = self.create_sales_page.get_element_text(self.create_sales_page.EVENT_TITLE).lower()
-            assert_true(sales_data["event_name"].lower()==event_text,"The name of the event didn't match","sales_event_creation", self.create_sales_page)  
             assert_false(self.create_sales_page.is_element_present(self.create_sales_page.INITIALIZE_SALE),"Initialize sales button still present","sales_event_creation",self.create_sales_page)
+            assert_true(sales_data["event_name"].lower()==event_text,"The name of the event didn't match","sales_event_creation", self.create_sales_page)  
         

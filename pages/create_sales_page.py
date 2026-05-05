@@ -21,19 +21,23 @@ class CreateSalesPage(BasePage):
     POPUP_DISMISS_BUTTON = (By.XPATH, "//button[normalize-space()='OK']")
     POPUP_OVERLAY = (By.CSS_SELECTOR, "div.absolute.inset-0")
     EVENT_TITLE = (By.XPATH, "//h1[contains(@class,'tracking-tight') and contains(@class,'text-zinc-900')]")
+    FINANCIAL = (By.XPATH,"//p[normalize-space()='Financial']")
+    ENTRY_FEE_INPUT = (By.XPATH,"(//input[@type='number'])[1]")
 
     def __init__(self, driver):
         super().__init__(driver)
 
 
 
-    def create_sales_event(self, event_name, date, max_lot, max_stables):
+    def create_sales_event(self, event_name, date, max_lot, max_stables, entry_fee):
         self.dismiss_popup_if_present()
         self.click_element(self.SALES_BUTTON)
         self.click_element(self.CREATE_SALE)
         self.enter_text(self.EVENT_NAME,event_name)
         self.enter_date(self.DATE, date)
         self.click_element(self.CREATE_SALE_BUTTON)
+        self.click_element(self.FINANCIAL)
+        self.enter_text(self.ENTRY_FEE_INPUT, entry_fee)
         self.click_element(self.SALE_SCHEDULE)
         self.click_element(self.EDIT_ICON)
 

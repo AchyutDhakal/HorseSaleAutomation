@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import ElementClickInterceptedException
+from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException, StaleElementReferenceException
 
 class BasePage:
     # OVERLAY = (By.XPATH, "//div[contains(@class,'backdrop-blur-sm') and contains(@class,'opacity-100')]")
@@ -33,12 +34,18 @@ class BasePage:
     #         pass
     
     def enter_text(self, locator, text):
-        element = self.find_element(locator)
-        # Scroll to center so sticky footer doesn't cover it
-        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
-        element.click()
-        element.clear()
-        element.send_keys(text)
+        for attempt in range(3):  # retry up to 3 times
+            try:
+                element = self.find_element(locator)
+                self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
+                element.click()
+                element.clear()
+                element.send_keys(text)
+                return  # success — exit
+            except StaleElementReferenceException:
+                if attempt == 2:  # last attempt failed
+                    raise
+                time.sleep(1)  # wait and retry
 
     def click_element(self, locator):
         # self.wait_for_overlay_to_disappear()
