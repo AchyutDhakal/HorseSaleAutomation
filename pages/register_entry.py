@@ -64,12 +64,15 @@ class RegisterEntry(BasePage):
             self.enter_text(self.CONSIGNOR_NAME, consignor_name)
             self.enter_text(self.CONSIGNOR_MOBILE,consignor_mobile)
 
+        else:
+            self.click_element(self.CONSIGNOR_NO)
+
 
         self.enter_text(self.REG_NUM, reg_num)
         self.select_custom_dropdown("horse.sex",self.get_name_by_index("horse.sex"))
         self.select_custom_dropdown("horse.colour",self.get_name_by_index("horse.colour"))
         self.select_custom_dropdown("horse.height",self.get_name_by_index("horse.height"))
-        # self.enter_text(self.HORSE_NAME, horse_name)
+        self.enter_text(self.HORSE_NAME, horse_name)
         # self.select_custom_dropdown("Class",self.get_name_by_index("Class"))
         # self.select_custom_dropdown("HwsdStatus", self.get_name_by_index("HwsdStatus"))
         # self.select_custom_dropdown("CountryOfOrigin",self.get_name_by_index("CountryOfOrigin"))
@@ -78,10 +81,11 @@ class RegisterEntry(BasePage):
         #     self.enter_date(self.DATE_OF_BIRTH,date_of_birth)
         
 
-        # self.select_custom_dropdown("StageOfTraining",self.get_name_by_index("StageOfTraining"))
-        # self.select_custom_dropdown("StageOfLunging", self.get_name_by_index("StageOfLunging"))
+        self.select_custom_dropdown("StageOfTraining",self.get_name_by_index("StageOfTraining"))
+        self.select_custom_dropdown("StageOfLunging", self.get_name_by_index("StageOfLunging"))
         # self.enter_text(self.ADDITIONAL_PERFORMANCE_DETAILS, additional_info)
         self.click_element(self.CONFIRM_REGISTRATION)
+        
 
 
 
