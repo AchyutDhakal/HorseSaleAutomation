@@ -179,7 +179,6 @@ class BasePage:
 
     def enter_3ds_otp(self, otp="123456"):
         try:
-            # Wait for a visible iframe to appear
             WebDriverWait(self.driver, 120).until(
                 lambda d: len([
                     i for i in d.find_elements(By.TAG_NAME, "iframe")
@@ -238,11 +237,117 @@ class BasePage:
         self.driver.find_element(By.TAG_NAME, "body").click()
 
 
-    def handle_save_address_popup(self):
-        try:
-            popup_btn = WebDriverWait(self.driver, 5).until(
-                EC.element_to_be_clickable((By.XPATH, "//button[contains(., 'Save')]"))
-            )
-            popup_btn.click()
-        except:
-            pass  # popup didn't appear
+    def fill_form_dynamically(self, form_data: dict):
+        # Wait for form to load
+        self.wait.until(
+            EC.presence_of_element_located((By.XPATH, "//select[@class='sr-only']"))
+        )
+        time.sleep(2)
+
+        # Step 1 — Scroll to trigger rendering
+        self._scroll_full_page()
+
+        # Step 2 — Fill dropdowns first
+        self._fill_dropdowns(form_data)
+
+        # Step 3 — Scroll again — new fields may have appeared after dropdown selection
+        time.sleep(1)
+        self._scroll_full_page()
+
+        # Step 4 — Fill dropdowns again — new ones may have appeared
+        self._fill_dropdowns(form_data)
+
+        # Step 5 — Fill inputs
+        self._fill_inputs(form_data)
+
+        # Step 6 — Fill textareas
+        self._fill_textareas(form_data)
+
+
+    def _scroll_full_page(self):
+        self.driver.execute_script("window.scrollTo(0, 0);")
+        last_height = 0
+        while True:
+            self.driver.execute_script("window.scrollBy(0, 300);")
+            time.sleep(0.3)
+            new_height = self.driver.execute_script("return window.scrollY")
+            if new_height == last_height:
+                break
+            last_height = new_height
+        self.driver.execute_script("window.scrollTo(0, 0);")
+        time.sleep(0.5)
+
+
+    def _fill_dropdowns(self, form_data: dict):
+        selects = self.driver.find_elements(By.XPATH, "//select[@class='sr-only']")
+        # print(f"\n--- Found {len(selects)} dropdowns ---")
+        for select in selects:
+            name = select.get_attribute("name")
+            if not name:
+                continue
+            # print(f"Dropdown: '{name}'")
+            if name in form_data and form_data[name] is None:
+                # print(f"  → Skipping")
+                continue
+            value = form_data.get(name)
+            if value is None:
+                try:
+                    value = self.get_name_by_index(name)
+                except Exception as e:
+                    # print(f"  → Could not get first option: {e}")
+                    continue
+            if value:
+                try:
+                    self.select_custom_dropdown(name, value)
+                    # print(f"  → Selected '{value}'")
+                except Exception as e:
+                    print(f"  → Failed: {e}")
+
+    def _fill_inputs(self, form_data: dict):
+        inputs = self.driver.find_elements(By.XPATH, "//input[not(@type='hidden') and not(@type='submit') and not(@type='checkbox') and not(@type='radio')]")
+        # print(f"\n--- Found {len(inputs)} inputs ---")
+        for input_el in inputs:
+            name = input_el.get_attribute("name")
+            placeholder = input_el.get_attribute("placeholder")
+            input_type = input_el.get_attribute("type")
+            # print(f"Input: name='{name}' placeholder='{placeholder}' type='{input_type}'")
+            if name in form_data and form_data[name] is None:
+                # print(f"  → Skipping")
+                continue
+            value = form_data.get(name) or form_data.get(placeholder)
+            if value:
+                try:
+                    self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", input_el)
+                    input_el.click()
+                    input_el.clear()
+                    if input_type == "date":
+                        self.driver.execute_script("""
+                            var nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+                                window.HTMLInputElement.prototype, 'value').set;
+                            nativeInputValueSetter.call(arguments[0], arguments[1]);
+                            arguments[0].dispatchEvent(new Event('input', {bubbles: true}));
+                            arguments[0].dispatchEvent(new Event('change', {bubbles: true}));
+                        """, input_el, value)
+                    else:
+                        input_el.send_keys(str(value))
+                    # print(f"  → Filled '{value}'")
+                except StaleElementReferenceException:
+                    print(f"  → Stale, skipping")
+
+
+    def _fill_textareas(self, form_data: dict):
+        textareas = self.driver.find_elements(By.TAG_NAME, "textarea")
+        for textarea in textareas:
+            name = textarea.get_attribute("name")
+            if name in form_data and form_data[name] is None:
+                continue
+            value = form_data.get(name)
+            if value:
+                try:
+                    self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", textarea)
+                    textarea.click()
+                    textarea.clear()
+                    textarea.send_keys(value)
+                    # print(f"Filled textarea '{name}'")
+                except StaleElementReferenceException:
+                    pass

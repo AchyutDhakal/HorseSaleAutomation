@@ -31,7 +31,25 @@ class TestRegisterEntry:
             self.login_page.login(login_data["email"], login_data["password"])
 
         with allure.step("Registering a new entry"):
-            self.register_entry.register_entry(entry_data["reg_num"], entry_data["horse_name"], entry_data["date_of_birth"], entry_data["additional_info"], entry_data["consignor_name"], entry_data["consignor_mobile"],entry_data["consignor"] )
+            self.register_entry.register_entry()
+
+
+            self.register_entry.fill_form_dynamically(entry_data)
+
+            if(entry_data["consignor"]=="No"):
+                if self.register_entry.is_element_clickable(self.register_entry.CONSIGNOR_NO):
+                    self.register_entry.click_element(self.register_entry.CONSIGNOR_NO)
+
+            if entry_data["breeding"] == "Yes":
+                if self.register_entry.is_element_clickable(self.register_entry.BREEDING_YES):
+                    self.register_entry.click_element(self.register_entry.BREEDING_YES)
+
+            if entry_data["disease_test"] == "Yes":
+                if self.register_entry.is_element_clickable(self.register_entry.DISEASE_TEST):
+                    self.register_entry.click_element(self.register_entry.DISEASE_TEST)
+
+            
+            self.register_entry.click_element(self.register_entry.CONFIRM_REGISTRATION)
 
         with allure.step("Assertion"):
             assert_false(self.register_entry.is_element_present(self.register_entry.ERROR_CONTAINER),"Error messages are displayed","valid_register_entry", self.register_entry)
@@ -45,8 +63,21 @@ class TestRegisterEntry:
             self.login_page.login(login_data["email"], login_data["password"])
 
         with allure.step("Registering a new entry"):
-            self.register_entry.register_entry(entry_data["reg_num"], entry_data["horse_name"], entry_data["date_of_birth"], entry_data["additional_info"], entry_data["consignor_name"], entry_data["consignor_mobile"],entry_data["consignor"] )
+            self.register_entry.register_entry()
+
+            self.register_entry.fill_form_dynamically(entry_data)
+
+            if(entry_data["consignor"]=="No"):
+                self.register_entry.click_element(self.register_entry.CONSIGNOR_NO)
+
+            if entry_data["breeding"] == "Yes":
+                self.register_entry.click_element(self.register_entry.BREEDING_YES)
+
+            if entry_data["disease_test"] == "Yes":
+                self.register_entry.click_element(self.register_entry.DISEASE_TEST)
+
+            
+            self.register_entry.click_element(self.register_entry.CONFIRM_REGISTRATION)
 
         with allure.step("Assertion"):
-            time.sleep(5)
             assert_true(self.register_entry.is_element_visible(self.register_entry.ERROR_CONTAINER),"Assertion failed as  the entry was registered for invalid data","Invalid_entry", self.register_entry)
