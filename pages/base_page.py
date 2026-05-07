@@ -25,14 +25,6 @@ class BasePage:
     def find_visible_element(self,locator):
         return self.wait.until(EC.visibility_of_element_located(locator))
     
-    # def wait_for_overlay_to_disappear(self):
-    #     try:
-    #         self.wait.until(
-    #             EC.invisibility_of_element_located(self.OVERLAY)
-    #         )
-    #     except TimeoutException:
-    #         pass
-    
     def enter_text(self, locator, text):
         for attempt in range(3):  # retry up to 3 times
             try:
@@ -48,18 +40,9 @@ class BasePage:
                 time.sleep(1)  # wait and retry
 
     def click_element(self, locator):
-        # self.wait_for_overlay_to_disappear()
         element = self.find_clickable_element(locator)
         self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
-        # try:
-        #     self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
         self.driver.execute_script("arguments[0].click();", element)
-        # except ElementClickInterceptedException:
-        #     # Another element is overlapping — wait briefly and try JS click
-        #     self.wait.until(
-        #         lambda d: d.execute_script("return document.readyState") == "complete"
-        #     )
-        #     self.driver.execute_script("arguments[0].click();", element)
 
     def get_element_text(self,locator):
         element = self.find_element(locator)
@@ -133,7 +116,6 @@ class BasePage:
         """, select_el, text)
 
         if value is None:
-            # Print available options to help debug mismatches
             options = self.driver.execute_script("""
                 return Array.from(arguments[0].options).map(o => o.text.trim());
             """, select_el)
@@ -186,7 +168,6 @@ class BasePage:
                 ]) > 0
             )
 
-            # Get all visible iframes and switch to the first visible one
             iframes = self.driver.find_elements(By.TAG_NAME, "iframe")
             switched = False
             for iframe in iframes:
@@ -304,6 +285,11 @@ class BasePage:
                     print(f"  → Failed: {e}")
 
     def _fill_inputs(self, form_data: dict):
+        self.wait.until(
+            EC.presence_of_element_located(
+                (By.NAME, "vendorId")
+            )
+        )
         inputs = self.driver.find_elements(By.XPATH, "//input[not(@type='hidden') and not(@type='submit') and not(@type='checkbox') and not(@type='radio')]")
         # print(f"\n--- Found {len(inputs)} inputs ---")
         for input_el in inputs:
@@ -351,3 +337,42 @@ class BasePage:
                     # print(f"Filled textarea '{name}'")
                 except StaleElementReferenceException:
                     pass
+
+
+    # def wait_and_click_add_general_entry(self):
+
+    #     def button_ready(driver):
+    #         try:
+    #             button = driver.find_element(*self.ADD_GENERAL_ENTRY)
+
+    #             return (
+    #                 button.is_displayed()
+    #                 and button.is_enabled()
+    #                 and button.get_attribute("disabled") is None
+    #             )
+
+    #         except StaleElementReferenceException:
+    #             return False
+
+    #     # WAIT UNTIL BUTTON READY
+    #     WebDriverWait(self.driver, 30).until(button_ready)
+
+    #     # SMALL STABILIZATION WAIT
+    #     time.sleep(0.5)
+
+    #     # RE-FIND BUTTON AFTER REACT RE-RENDER
+    #     button = self.driver.find_element(*self.ADD_GENERAL_ENTRY)
+
+    #     # SCROLL INTO VIEW
+    #     self.driver.execute_script(
+    #         "arguments[0].scrollIntoView({block: 'center'});",
+    #         button
+    #     )
+
+    #     # FORCE CLICK
+    #     self.driver.execute_script(
+    #         "arguments[0].click();",
+    #         button
+    #     )
+
+    #     print("Button clicked")

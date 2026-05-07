@@ -439,10 +439,10 @@ VALID_PUBLIC_PORTAL = [
         "town":"Kathmandu",
         "postcode":257489,
         "eq_number":25466335,
-        "HorseName":f"Random Horse_{int(time.time())}",
+        "horse_name":f"Random Horse_{int(time.time())}",
         "reg_number":369874512369,
         "additional_performance":"Est exercitation aliqua eiusmod adipisicing cillum sunt ipsum proident fugiat laboris qui. Fugiat quis veniam aliqua officia aliqua qui do laborum Lorem.",
-        "DateOfBirth": past_date
+        "date_of_birth": past_date,
     }
 ]
 

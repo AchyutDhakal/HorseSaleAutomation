@@ -52,11 +52,14 @@ class RegisterEntry(BasePage):
         else:
             self.click_element(self.OPEN_PRESALE)
 
-        if self.is_element_visible(self.ADD_GENERAL_ENTRY):
+
+        if self.is_element_clickable(self.ADD_GENERAL_ENTRY):
             pass
         else:
             self.click_element(self.OPEN_GENERAL)
 
+        # self.wait_and_click_add_general_entry()
+        time.sleep(1)
         self.click_element(self.ADD_GENERAL_ENTRY)
 
 

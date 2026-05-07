@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class PublicPortal(BasePage):
     ENTER_HORSE_BUTTON = (By.XPATH,"(//a[normalize-space()='Enter a Horse'])[2]")
-    EVENT = (By.XPATH,"//button[.//span[contains(@class,'font-bold') and contains(@class,'text-[14px]')]][2]")
+    EVENT = (By.XPATH,"//button[.//span[contains(@class,'font-bold') and contains(@class,'text-[14px]')]][1]")
     CONTINUE_BUTTON =(By.XPATH,"//button[normalize-space()='Continue']")
     EMAIL_INPUT = (By.XPATH,"//input[@type='email']")
     VERIFY_CODE_BUTTON = (By.XPATH,"//button[normalize-space()='Verify code']")
@@ -98,7 +98,6 @@ class PublicPortal(BasePage):
         self.click_element(self.NEXT_STEP_BUTTON)
         self.click_element(self.DOCUMENT_LATER)
 
-        self.handle_save_address_popup()
         self.select_custom_dropdown(self.SECTION_CATEGORY, self.get_name_by_index(self.SECTION_CATEGORY))
         self.enter_text(self.HORSE_NAME, horse_name)
         self.enter_text(self.REG_NUMBER, reg_number)
