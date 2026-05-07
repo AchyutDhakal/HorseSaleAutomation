@@ -47,6 +47,7 @@ class RegisterEntry(BasePage):
 
         status = self.get_element_text(self.STATUS).lower()
         if status == "draft":
+            self.take_screenshot("draft_event")
             raise AssertionError("The event is in draft")
 
         self.wait.until(EC.element_to_be_clickable(self.OVERVIEW_DROPDOWN))
