@@ -31,6 +31,7 @@ class RegisterEntry(BasePage):
     CLOSE_PRESALE = (By.XPATH,"//button[normalize-space()='Close Pre-Sale']")
     BREEDING_YES = (By.XPATH,"//label[contains(text(),'Is breeding recorded?')]/..//button[normalize-space()='Yes']")
     DISEASE_TEST = (By.XPATH,"//label[contains(text(),'Has this Connemara been tested for Hoof Wall Separation Disease?')]/..//button[normalize-space()='Yes']")
+    STATUS = (By.XPATH,"//div[contains(@class,'items-start') and contains(@class,'flex-wrap')]/span")
 
 
     def __init__(self,driver):
@@ -43,6 +44,11 @@ class RegisterEntry(BasePage):
         self.wait.until(EC.element_to_be_clickable(self.EVENT_NAME))
         self.wait.until(EC.visibility_of_element_located(self.EVENT_NAME))
         self.click_element(self.ENTRY)
+
+        status = self.get_element_text(self.STATUS).lower()
+        if status == "draft":
+            raise AssertionError("The event is in draft")
+
         self.wait.until(EC.element_to_be_clickable(self.OVERVIEW_DROPDOWN))
         self.click_element(self.OVERVIEW_DROPDOWN)
         self.click_element(self.PRESALE)
