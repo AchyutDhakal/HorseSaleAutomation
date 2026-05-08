@@ -447,14 +447,15 @@ VALID_PUBLIC_PORTAL = [
 ]
 
 
-# REGISTER_ENTRY_FORM_DATA = [
-#     {
-#         "horse.registrationNumber": "12548587866",
-#         "HorseName": "testHorse",
-#         "DateOfBirth": past_date,
-#         "AdditionalPerformanceDetails": "Occaecat ullamco nulla eiusmod elit magna magna sint aliqua id pariatur eu cillum adipisicing. Reprehenderit fugiat ad minim exercitation aute ad deserunt eu. Consequat minim consectetur cillum aliqua deserunt. Eu Lorem laboris anim deserunt amet sit laborum deserunt dolor laboris do esse proident commodo.",
-#         "Select year":"2025",
-#         "consignorName":"Random_person",
-#         "consignorMobile":"9856563214"
-#     }
-# ]
+VENDOR_DATA =[
+    {
+        "email":f"randomemail+{int(time.time())}@gmail.com",
+        "mobileNumber":9566556985,
+        "firstName":"Achyut",
+        "lastName":"Dhakal",
+        "addressLine1":"Kathmandu, Nepal",
+        "townCity":"Kathmandu",
+        "postcode":515155,
+        "equinePremisesNumber":164551592626,
+    }
+]

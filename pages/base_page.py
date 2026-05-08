@@ -261,44 +261,44 @@ class BasePage:
 
     def _fill_dropdowns(self, form_data: dict):
         selects = self.driver.find_elements(By.XPATH, "//select[@class='sr-only']")
-        # print(f"\n--- Found {len(selects)} dropdowns ---")
+        print(f"\n--- Found {len(selects)} dropdowns ---")
         for select in selects:
             name = select.get_attribute("name")
             if not name:
                 continue
-            # print(f"Dropdown: '{name}'")
+            print(f"Dropdown: '{name}'")
             if name in form_data and form_data[name] is None:
-                # print(f"  → Skipping")
+                print(f"  → Skipping")
                 continue
             value = form_data.get(name)
             if value is None:
                 try:
                     value = self.get_name_by_index(name)
                 except Exception as e:
-                    # print(f"  → Could not get first option: {e}")
+                    print(f"  → Could not get first option: {e}")
                     continue
             if value:
                 try:
                     self.select_custom_dropdown(name, value)
-                    # print(f"  → Selected '{value}'")
+                    print(f"  → Selected '{value}'")
                 except Exception as e:
                     print(f"  → Failed: {e}")
 
     def _fill_inputs(self, form_data: dict):
-        self.wait.until(
-            EC.presence_of_element_located(
-                (By.NAME, "vendorId")
-            )
-        )
+        # self.wait.until(
+        #     EC.presence_of_element_located(
+        #         (By.NAME, "vendorId")
+        #     )
+        # )
         inputs = self.driver.find_elements(By.XPATH, "//input[not(@type='hidden') and not(@type='submit') and not(@type='checkbox') and not(@type='radio')]")
-        # print(f"\n--- Found {len(inputs)} inputs ---")
+        print(f"\n--- Found {len(inputs)} inputs ---")
         for input_el in inputs:
             name = input_el.get_attribute("name")
             placeholder = input_el.get_attribute("placeholder")
             input_type = input_el.get_attribute("type")
-            # print(f"Input: name='{name}' placeholder='{placeholder}' type='{input_type}'")
+            print(f"Input: name='{name}' placeholder='{placeholder}' type='{input_type}'")
             if name in form_data and form_data[name] is None:
-                # print(f"  → Skipping")
+                print(f"  → Skipping")
                 continue
             value = form_data.get(name) or form_data.get(placeholder)
             if value:
@@ -316,7 +316,7 @@ class BasePage:
                         """, input_el, value)
                     else:
                         input_el.send_keys(str(value))
-                    # print(f"  → Filled '{value}'")
+                    print(f"  → Filled '{value}'")
                 except StaleElementReferenceException:
                     print(f"  → Stale, skipping")
 
@@ -334,7 +334,7 @@ class BasePage:
                     textarea.click()
                     textarea.clear()
                     textarea.send_keys(value)
-                    # print(f"Filled textarea '{name}'")
+                    print(f"Filled textarea '{name}'")
                 except StaleElementReferenceException:
                     pass
 

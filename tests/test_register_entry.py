@@ -55,29 +55,29 @@ class TestRegisterEntry:
             assert_false(self.register_entry.is_element_present(self.register_entry.ERROR_CONTAINER),"Error messages are displayed","valid_register_entry", self.register_entry)
 
 
-    # @allure.title("Testing the process of registering a new general entry through admin portal using invalid data")
-    # @pytest.mark.parametrize("entry_data", INVALID_ENTRY_DATA)
-    # @pytest.mark.parametrize("login_data", VALID_DATA)
-    # def test_invalid_register_entry(self, entry_data, login_data):
-    #     with allure.step("Logging in to the application"):
-    #         self.login_page.login(login_data["email"], login_data["password"])
+    @allure.title("Testing the process of registering a new general entry through admin portal using invalid data")
+    @pytest.mark.parametrize("entry_data", INVALID_ENTRY_DATA)
+    @pytest.mark.parametrize("login_data", VALID_DATA)
+    def test_invalid_register_entry(self, entry_data, login_data):
+        with allure.step("Logging in to the application"):
+            self.login_page.login(login_data["email"], login_data["password"])
 
-    #     with allure.step("Registering a new entry"):
-    #         self.register_entry.register_entry()
+        with allure.step("Registering a new entry"):
+            self.register_entry.register_entry()
 
-    #         self.register_entry.fill_form_dynamically(entry_data)
+            self.register_entry.fill_form_dynamically(entry_data)
 
-    #         if(entry_data["consignor"]=="No"):
-    #             self.register_entry.click_element(self.register_entry.CONSIGNOR_NO)
+            if(entry_data["consignor"]=="No"):
+                self.register_entry.click_element(self.register_entry.CONSIGNOR_NO)
 
-    #         if entry_data["breeding"] == "Yes":
-    #             self.register_entry.click_element(self.register_entry.BREEDING_YES)
+            if entry_data["breeding"] == "Yes":
+                self.register_entry.click_element(self.register_entry.BREEDING_YES)
 
-    #         if entry_data["disease_test"] == "Yes":
-    #             self.register_entry.click_element(self.register_entry.DISEASE_TEST)
+            if entry_data["disease_test"] == "Yes":
+                self.register_entry.click_element(self.register_entry.DISEASE_TEST)
 
             
-    #         self.register_entry.click_element(self.register_entry.CONFIRM_REGISTRATION)
+            self.register_entry.click_element(self.register_entry.CONFIRM_REGISTRATION)
 
-    #     with allure.step("Assertion"):
-    #         assert_true(self.register_entry.is_element_visible(self.register_entry.ERROR_CONTAINER),"Assertion failed as  the entry was registered for invalid data","Invalid_entry", self.register_entry)
+        with allure.step("Assertion"):
+            assert_true(self.register_entry.is_element_visible(self.register_entry.ERROR_CONTAINER),"Assertion failed as  the entry was registered for invalid data","Invalid_entry", self.register_entry)
