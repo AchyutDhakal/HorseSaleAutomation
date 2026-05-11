@@ -433,16 +433,22 @@ VALID_PUBLIC_PORTAL = [
     {
         "email_address":email_address,
         "mobile_number":9875487896,
-        "first_name":"Random",
-        "last_name":"Person",
-        "address":"kathmandu, Nepal",
-        "town":"Kathmandu",
-        "postcode":257489,
-        "eq_number":25466335,
-        "horse_name":f"Random Horse_{int(time.time())}",
-        "reg_number":369874512369,
-        "additional_performance":"Est exercitation aliqua eiusmod adipisicing cillum sunt ipsum proident fugiat laboris qui. Fugiat quis veniam aliqua officia aliqua qui do laborum Lorem.",
-        "date_of_birth": past_date,
+        "firstName":"Random",
+        "lastName":"Person",
+        "address.addressLine1":"kathmandu, Nepal",
+        "address.townCity":"Kathmandu",
+        "address.postcode":257489,
+        "equinePremisesNumber":25466335,
+        "horses[0].horse.horseName":f"Random Horse_{int(time.time())}",
+        "horses[0].horse.registrationNumber":369874512369,
+        "horses[0].horse.performance.additionalPerformanceDetails":"Est exercitation aliqua eiusmod adipisicing cillum sunt ipsum proident fugiat laboris qui. Fugiat quis veniam aliqua officia aliqua qui do laborum Lorem.",
+        "horses[0].horse.dateOfBirth": past_date,
+        "Select year":2025,
+        "horses[0].horse.performance.sjiPointsWon":5,
+        "horses[0].horse.performance.eventingIrelandPoints":3,
+        "horses[0].horse.performance.huntedWith":"Donald Trump",
+        "horses[0].horse.performance.huntedHowManyOccasions":6,
+        "horses[0].horse.performance.huntedHowManySeasons":5
     }
 ]
 

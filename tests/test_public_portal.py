@@ -7,6 +7,7 @@ from pages.login_page import LoginPage
 from pages.register_entry import RegisterEntry
 from selenium.webdriver.common.by import By
 from utils.assertions import assert_true
+from config import CARD_NUMBER, EXPIRY_MONTH, EXPIRY_YEAR, CVV
 
 class TestPublicPortal:
     def setup_method(self):
@@ -24,9 +25,29 @@ class TestPublicPortal:
     @pytest.mark.parametrize("valid_entry", VALID_PUBLIC_PORTAL)
     @pytest.mark.parametrize("login_data", VALID_DATA)
     def test_valid_horse_entry(self, valid_entry, login_data):
-        with allure.step("Filling up the form"):
-            self.public_portal.register_entry(valid_entry["email_address"],valid_entry["mobile_number"], valid_entry["first_name"], valid_entry["last_name"], valid_entry["address"], valid_entry["town"], valid_entry["postcode"], valid_entry["eq_number"], valid_entry["horse_name"], valid_entry["reg_number"], valid_entry["additional_performance"], valid_entry["date_of_birth"])
+        with allure.step("Navigating to the entry form and Filling up email, phone number and the vendor details"):
+            self.public_portal.register_entry(valid_entry["email_address"],valid_entry["mobile_number"], valid_entry["firstName"], valid_entry["lastName"], valid_entry["address.addressLine1"], valid_entry["address.townCity"], valid_entry["address.postcode"], valid_entry["equinePremisesNumber"])
+    
+        with allure.step("Clicking on upload documents later"):
+            self.public_portal.click_element(self.public_portal.DOCUMENT_LATER)
 
+        with allure.step("Filling up horse details"):
+            self.public_portal.fill_form_dynamically(valid_entry)
+            self.public_portal.click_element(self.public_portal.NEXT_STEP_BUTTON)
+            self.public_portal.click_element(self.public_portal.NEXT_STEP_BUTTON)
+
+        with allure.step("Filling up card details and clicking privacy policy checkboxes"):
+            self.public_portal.click_element(self.public_portal.TERMS_AND_CONDITION_CHECKBOX)
+            self.public_portal.click_element(self.public_portal.PRIVACY_POLICY_CHECKBOX)
+            self.public_portal.enter_text(self.public_portal.CARD_NUMBER_INPUT, CARD_NUMBER)
+            self.public_portal.enter_text(self.public_portal.EXPIRY_MONTH_INPUT, EXPIRY_MONTH)
+            self.public_portal.enter_text(self.public_portal.EXPIRY_YEAR_INPUT, EXPIRY_YEAR)
+            self.public_portal.enter_text(self.public_portal.CVV_INPUT, CVV)
+            self.public_portal.click_element(self.public_portal.FINALIZE_ENTRY_BUTTON)
+
+        with allure.step("Entering otp for card"):
+            self.public_portal.enter_3ds_otp()
+            self.public_portal.wait.until(lambda d: self.public_portal.is_element_visible(self.public_portal.RETURN_TO_HOMEPAGE_BUTTON))
 
         with allure.step("Asserting entry finalization"):
             entry_status = self.public_portal.get_element_text(self.public_portal.ENTRY_STATUS)
@@ -47,7 +68,7 @@ class TestPublicPortal:
         
         with allure.step("Assertion against the horse name"):
             horse_name = self.public_portal.get_element_text(self.public_portal.HORSE_NAME_ADMIN)
-            assert_true((valid_entry["horse_name"] == horse_name),"The horse names don't match", "Valid_public_entry",self.public_portal)
+            assert_true((valid_entry["horses[0].horse.horseName"] == horse_name),"The horse names don't match", "Valid_public_entry",self.public_portal)
 
 
 

@@ -260,36 +260,55 @@ class BasePage:
 
 
     def _fill_dropdowns(self, form_data: dict):
-        selects = self.driver.find_elements(By.XPATH, "//select[@class='sr-only']")
-        print(f"\n--- Found {len(selects)} dropdowns ---")
-        for select in selects:
-            name = select.get_attribute("name")
-            if not name:
-                continue
-            print(f"Dropdown: '{name}'")
-            if name in form_data and form_data[name] is None:
-                print(f"  → Skipping")
-                continue
-            value = form_data.get(name)
-            if value is None:
+        # Get dropdown names first, then select one by one
+        # Re-finding after each selection to avoid stale references
+        
+        processed = set()  # track already processed dropdowns
+        
+        while True:
+            selects = self.driver.find_elements(By.XPATH, "//select[@class='sr-only']")
+            
+            # Find first unprocessed dropdown
+            found_new = False
+            for select in selects:
                 try:
-                    value = self.get_name_by_index(name)
-                except Exception as e:
-                    print(f"  → Could not get first option: {e}")
+                    name = select.get_attribute("name")
+                except StaleElementReferenceException:
+                    break  # list is stale, restart loop
+
+                if not name or name in processed:
                     continue
-            if value:
-                try:
-                    self.select_custom_dropdown(name, value)
-                    print(f"  → Selected '{value}'")
-                except Exception as e:
-                    print(f"  → Failed: {e}")
+
+                processed.add(name)
+                found_new = True
+
+                print(f"Dropdown: '{name}'")
+
+                if name in form_data and form_data[name] is None:
+                    print(f"  → Skipping")
+                    break
+
+                value = form_data.get(name)
+                if value is None:
+                    try:
+                        value = self.get_name_by_index(name)
+                    except Exception as e:
+                        print(f"  → Could not get first option: {e}")
+                        break
+
+                if value:
+                    try:
+                        self.select_custom_dropdown(name, value)
+                        print(f"  → Selected '{value}'")
+                        time.sleep(0.5)  # wait for page to re-render after selection
+                    except Exception as e:
+                        print(f"  → Failed: {e}")
+                break  # restart outer loop to re-find all selects
+
+            if not found_new:
+                break  # all dropdowns processed
 
     def _fill_inputs(self, form_data: dict):
-        # self.wait.until(
-        #     EC.presence_of_element_located(
-        #         (By.NAME, "vendorId")
-        #     )
-        # )
         inputs = self.driver.find_elements(By.XPATH, "//input[not(@type='hidden') and not(@type='submit') and not(@type='checkbox') and not(@type='radio')]")
         print(f"\n--- Found {len(inputs)} inputs ---")
         for input_el in inputs:
