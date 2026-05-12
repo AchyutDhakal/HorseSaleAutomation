@@ -36,16 +36,16 @@ class TestRegisterEntry:
 
             self.register_entry.fill_form_dynamically(entry_data)
 
-            if(entry_data["consignor"]=="No"):
-                if self.register_entry.is_element_clickable(self.register_entry.CONSIGNOR_NO):
-                    self.register_entry.click_element(self.register_entry.CONSIGNOR_NO)
+            if(entry_data["consignor"]=="Yes"):
+                if self.register_entry.is_element_present(self.register_entry.CONSIGNOR_YES):
+                    self.register_entry.click_element(self.register_entry.CONSIGNOR_YES)
 
             if entry_data["breeding"] == "Yes":
-                if self.register_entry.is_element_clickable(self.register_entry.BREEDING_YES):
+                if self.register_entry.is_element_present(self.register_entry.BREEDING_YES):
                     self.register_entry.click_element(self.register_entry.BREEDING_YES)
 
             if entry_data["disease_test"] == "Yes":
-                if self.register_entry.is_element_clickable(self.register_entry.DISEASE_TEST):
+                if self.register_entry.is_element_present(self.register_entry.DISEASE_TEST):
                     self.register_entry.click_element(self.register_entry.DISEASE_TEST)
 
             
