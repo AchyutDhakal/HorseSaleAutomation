@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from utils.otp_reader import get_otp_from_email
 import time
 from selenium.webdriver.support import expected_conditions as EC
+from config import CARD_NUMBER, EXPIRY_MONTH, EXPIRY_YEAR, CVV
 
 class PublicPortal(BasePage):
     ENTER_HORSE_BUTTON = (By.XPATH,"(//a[normalize-space()='Enter a Horse'])[2]")
@@ -56,13 +57,16 @@ class PublicPortal(BasePage):
     ENTRY_STATUS = (By.XPATH,"(//div[.//span[normalize-space()='Entry status']]//span[last()])[2]")
     SEARCH_ENTRY = (By.XPATH,"//input[@placeholder='Search by Name, Lot#, or vendor...']")
     SEARCH_EVENT = (By.XPATH,"//input[@placeholder='Search sales...']")
+    OVERVIEW_DROPDOWN = (By.XPATH,"(//span[normalize-space()='Overview'])[1]")
+    PRESALE = (By.XPATH, "//span[normalize-space()='Pre-Sale']")
+    SALES = (By.XPATH,"//span[normalize-space()='Sales']")
 
 
 
     def __init__(self, driver):
         super().__init__(driver)
 
-    def register_entry(self, email_address, mobile_number, first_name, last_name, address, town, postcode, eq_number):
+    def fill_vendor_details(self, email_address, mobile_number, first_name, last_name, address, town, postcode, eq_number):
         self.dismiss_popup_if_present()
         self.click_element(self.ENTER_HORSE_BUTTON)
 
@@ -96,35 +100,25 @@ class PublicPortal(BasePage):
         self.enter_text(self.EQUINE_PREMISES_NUMBER_INPUT, eq_number)
         self.click_element(self.NEXT_STEP_BUTTON)
 
-        # self.select_custom_dropdown(self.SECTION_CATEGORY, self.get_name_by_index(self.SECTION_CATEGORY,1))
-        # self.enter_text(self.HORSE_NAME, horse_name)
-        # self.enter_text(self.REG_NUMBER, reg_number)
-        # self.select_custom_dropdown(self.SEX, self.get_name_by_index(self.SEX))
-        # self.select_custom_dropdown(self.PRIMARY_COLOUR, self.get_name_by_index(self.PRIMARY_COLOUR))
-        # self.select_custom_dropdown(self.HEIGHT, self.get_name_by_index(self.HEIGHT))
-        # self.select_custom_dropdown(self.AGE, self.get_name_by_index(self.AGE))
-        # self.select_custom_dropdown("horses[0].horse.class", self.get_name_by_index("horses[0].horse.class"))
-        # self.select_custom_dropdown("horses[0].horse.hwsdStatus", self.get_name_by_index("horses[0].horse.hwsdStatus"))
-        # self.enter_date(self.DATE_OF_BIRTH, date_of_birth)
-        # self.select_custom_dropdown("horses[0].horse.countryOfOrigin", self.get_name_by_index("horses[0].horse.countryOfOrigin"))
-        # self.select_custom_dropdown("horses[0].horse.performance.stageOfTraining", self.get_name_by_index("horses[0].horse.performance.stageOfTraining"))
-        # self.select_custom_dropdown("horses[0].horse.performance.stageOfLunging", self.get_name_by_index("horses[0].horse.performance.stageOfLunging"))
-        # self.enter_text(self.ADDITIONAL_PERFORMANCE_DETAILS_INPUT, additional_performance)
-        # self.click_element(self.NEXT_STEP_BUTTON)
-        # self.click_element(self.NEXT_STEP_BUTTON)
-        # self.click_element(self.TERMS_AND_CONDITION_CHECKBOX)
-        # self.click_element(self.PRIVACY_POLICY_CHECKBOX)
-        # self.enter_text(self.CARD_NUMBER_INPUT, CARD_NUMBER)
-        # self.enter_text(self.EXPIRY_MONTH_INPUT, EXPIRY_MONTH)
-        # self.enter_text(self.EXPIRY_YEAR_INPUT, EXPIRY_YEAR)
-        # self.enter_text(self.CVV_INPUT, CVV)
-        # self.click_element(self.FINALIZE_ENTRY_BUTTON)
-       
-        # self.enter_3ds_otp()
 
-        # self.wait.until(lambda d: self.is_element_visible(self.RETURN_TO_HOMEPAGE_BUTTON))
-
+    def fill_card_details(self):
+        self.click_element(self.TERMS_AND_CONDITION_CHECKBOX)
+        self.click_element(self.PRIVACY_POLICY_CHECKBOX)
+        self.enter_text(self.CARD_NUMBER_INPUT, CARD_NUMBER)
+        self.enter_text(self.EXPIRY_MONTH_INPUT, EXPIRY_MONTH)
+        self.enter_text(self.EXPIRY_YEAR_INPUT, EXPIRY_YEAR)
+        self.enter_text(self.CVV_INPUT, CVV)
+        self.click_element(self.FINALIZE_ENTRY_BUTTON)
+        self.enter_3ds_otp()
+        self.wait.until(lambda d: self.is_element_visible(self.RETURN_TO_HOMEPAGE_BUTTON))
             
             
-
+    def navigate_to_admin_sales(self):
+        self.click_element(self.SALES)
+        self.enter_text(self.SEARCH_EVENT, self.event_text)
+        EVENT_NAME = (By.XPATH,f"//span[normalize-space()='{self.event_text}']")
+        self.click_element(EVENT_NAME)
+        self.click_element(self.OVERVIEW_DROPDOWN)
+        self.click_element(self.PRESALE)
+        self.click_element(self.ENTRY)
 
