@@ -4,7 +4,8 @@ from pages.create_sales_page import CreateSalesPage
 from pages.register_entry import RegisterEntry
 import allure
 import pytest
-from data.test_data import VALID_DATA, ENTRY_DATA, INVALID_ENTRY_DATA
+from data.register_entry_data import ENTRY_DATA, INVALID_ENTRY_DATA
+from data.login_data import VALID_DATA
 from utils.assertions import assert_true, assert_false
 import time
 from config import BASE_URL
@@ -39,6 +40,8 @@ class TestRegisterEntry:
             if(entry_data["consignor"]=="Yes"):
                 if self.register_entry.is_element_present(self.register_entry.CONSIGNOR_YES):
                     self.register_entry.click_element(self.register_entry.CONSIGNOR_YES)
+                    self.register_entry.enter_text(self.register_entry.CONSIGNOR_NAME,entry_data["consignorName"])
+                    self.register_entry.enter_text(self.register_entry.CONSIGNOR_MOBILE,entry_data["consignorMobile"])
 
             if entry_data["breeding"] == "Yes":
                 if self.register_entry.is_element_present(self.register_entry.BREEDING_YES):
@@ -67,8 +70,11 @@ class TestRegisterEntry:
 
             self.register_entry.fill_form_dynamically(entry_data)
 
-            if(entry_data["consignor"]=="No"):
-                self.register_entry.click_element(self.register_entry.CONSIGNOR_NO)
+            if(entry_data["consignor"]=="Yes"):
+                if self.register_entry.is_element_present(self.register_entry.CONSIGNOR_YES):
+                    self.register_entry.click_element(self.register_entry.CONSIGNOR_YES)
+                    self.register_entry.enter_text(self.register_entry.CONSIGNOR_NAME,entry_data["consignorName"])
+                    self.register_entry.enter_text(self.register_entry.CONSIGNOR_MOBILE,entry_data["consignorMobile"])
 
             if entry_data["breeding"] == "Yes":
                 self.register_entry.click_element(self.register_entry.BREEDING_YES)

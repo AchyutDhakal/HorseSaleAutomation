@@ -4,7 +4,8 @@ from pages.login_page import LoginPage
 from pages.add_vendor import AddVendor
 import allure 
 import pytest
-from data.test_data import VENDOR_DATA, VALID_DATA
+from data.add_vendor_data import VENDOR_DATA
+from data.login_data import VALID_DATA
 import time
 from utils.assertions import assert_equal
 from selenium.webdriver.support import expected_conditions as EC

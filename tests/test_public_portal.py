@@ -2,7 +2,8 @@ from utils.test_runner import create_driver
 from pages.public_portal import PublicPortal
 import allure
 import pytest
-from data.test_data import VALID_PUBLIC_PORTAL, VALID_DATA
+from data.public_entry_data import VALID_PUBLIC_PORTAL
+from data.login_data import VALID_DATA
 from pages.login_page import LoginPage
 from pages.register_entry import RegisterEntry
 from selenium.webdriver.common.by import By

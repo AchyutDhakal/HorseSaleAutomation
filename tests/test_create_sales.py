@@ -3,7 +3,8 @@ from pages.login_page import LoginPage
 from pages.create_sales_page import CreateSalesPage
 import allure
 import pytest
-from data.test_data import VALID_DATA,SALES_DATA
+from data.sales_data import SALES_DATA
+from data.login_data import VALID_DATA
 from utils.assertions import assert_true, assert_false
 import time
 

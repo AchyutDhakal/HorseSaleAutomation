@@ -1,7 +1,7 @@
 from utils.test_runner import create_driver
 from pages.login_page import LoginPage
 import pytest
-from data.test_data import VALID_DATA, INVALID_DATA
+from data.login_data import VALID_DATA, INVALID_DATA
 import allure
 import time
 from utils.assertions import assert_true,assert_false
