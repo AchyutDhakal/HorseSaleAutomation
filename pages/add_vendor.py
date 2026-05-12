@@ -23,6 +23,8 @@ class AddVendor(BasePage):
     CREATE_VENDOR_BUTTON = (By.XPATH,"//span[normalize-space()='Create Vendor Record']")
     EMAIL_ADDRESS = (By.XPATH,"//div[contains(@class,'text-[#7A7A7A]') and contains(@class,'min-w-0')]")
     SEARCH_BAR = (By.XPATH,"//input[@placeholder='Search Vendors...']")
+    VENDOR = (By.XPATH,"//tbody/tr[1]")
+    MOBILE_NUMBER = (By.XPATH,"//span[contains(normalize-space(),'Mobile Number')]/ancestor::div[contains(@class,'min-w-0')][1]//div[contains(@class,'bg-[#FAFAFA]') and contains(@class,'rounded-xl')]")
 
     def __init__(self, driver):
         super().__init__(driver)

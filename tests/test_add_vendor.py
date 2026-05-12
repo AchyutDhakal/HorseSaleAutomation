@@ -40,6 +40,10 @@ class TestAddVendor:
         with allure.step("Assertion against the email address"):
             self.add_vendor.wait.until(EC.element_to_be_clickable(self.add_vendor.ADD_NEW_VENDOR_BUTTON))
             self.add_vendor.wait.until(EC.invisibility_of_element_located(self.add_vendor.EMAIL_INPUT))
-            self.add_vendor.enter_text(self.add_vendor.SEARCH_BAR,vendor_data["email"])
-            email = self.add_vendor.get_element_text(self.add_vendor.EMAIL_ADDRESS)
-            assert_equal(email,vendor_data["email"], "The email address does not match","add_vendor",self.add_vendor)
+            self.add_vendor.click_element(self.add_vendor.VENDOR)
+            self.add_vendor.wait.until(
+                lambda d: d.find_element(*self.add_vendor.MOBILE_NUMBER).text not in ['-', '', None]
+            )
+            actual_mobile_number = self.add_vendor.get_element_text(self.add_vendor.MOBILE_NUMBER)
+            expected_mobile_number = "+353"+" "+f"{vendor_data["mobileNumber"]}"
+            assert_equal(actual_mobile_number, expected_mobile_number, "The mobile numbers doesn't match","valid_add_vendor",self.add_vendor)

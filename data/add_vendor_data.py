@@ -3,7 +3,7 @@ import time
 VENDOR_DATA =[
     {
         "email":f"randomemail+{int(time.time())}@gmail.com",
-        "mobileNumber":9566556985,
+        "mobileNumber":int(time.time()),
         "firstName":"Achyut",
         "lastName":"Dhakal",
         "addressLine1":"Kathmandu, Nepal",
