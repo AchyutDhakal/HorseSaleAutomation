@@ -60,14 +60,14 @@ class PublicPortal(BasePage):
     OVERVIEW_DROPDOWN = (By.XPATH,"(//span[normalize-space()='Overview'])[1]")
     PRESALE = (By.XPATH, "//span[normalize-space()='Pre-Sale']")
     SALES = (By.XPATH,"//span[normalize-space()='Sales']")
+    INVALID_PHONE_ERROR = (By.XPATH,"//p[contains(@class,'text-red-500') and contains(@class,'text-xs') and contains(@class,'font-medium')]")
 
 
 
     def __init__(self, driver):
         super().__init__(driver)
 
-    def fill_vendor_details(self, email_address, mobile_number, first_name, last_name, address, town, postcode, eq_number):
-        self.dismiss_popup_if_present()
+    def navigate_to_entry_form(self, email_address, mobile_number):
         self.click_element(self.ENTER_HORSE_BUTTON)
 
         if(self.is_element_clickable(self.EVENT)==False):
@@ -85,20 +85,26 @@ class PublicPortal(BasePage):
         self.click_element(self.VERIFY_CODE_BUTTON)
         self.enter_text(self.MOBILE_NUMBER_INPUT, mobile_number)
         self.click_element(self.NEXT_STEP_BUTTON)
-        self.click_element(self.CONTINUE_BUTTON)
-        self.click_element(self.FORMAL_TITLE_DROPDOWN)
-        self.click_element(self.FORMAL_TITLE)
+
+        
+    def fill_vendor_details(self, first_name, last_name, address, town, postcode, eq_number, formal_title, county, country):
+        if formal_title is not None:
+            self.click_element(self.FORMAL_TITLE_DROPDOWN)
+            self.click_element(self.FORMAL_TITLE)
+
         self.enter_text(self.FIRST_NAME_INPUT, first_name)
         self.enter_text(self.LAST_NAME_INPUT, last_name)
         self.enter_text(self.ADDRESS_LINE_1_INPUT, address)
         self.enter_text(self.TOWN_INPUT, town)
-        self.click_element(self.COUNTY_DROPDOWN)
-        self.click_element(self.COUNTY)
+        if county is not None:
+            self.click_element(self.COUNTY_DROPDOWN)
+            self.click_element(self.COUNTY)
         self.enter_text(self.POSTCODE_INPUT, postcode)
-        self.click_element(self.COUNTRY_DROPDOWN)
-        self.click_element(self.COUNTRY)
+
+        if country is not None:
+            self.click_element(self.COUNTRY_DROPDOWN)
+            self.click_element(self.COUNTRY)
         self.enter_text(self.EQUINE_PREMISES_NUMBER_INPUT, eq_number)
-        self.click_element(self.NEXT_STEP_BUTTON)
 
 
     def fill_card_details(self):
