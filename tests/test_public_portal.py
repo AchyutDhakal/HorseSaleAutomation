@@ -2,7 +2,7 @@ from utils.test_runner import create_driver
 from pages.public_portal import PublicPortal
 import allure
 import pytest
-from data.public_entry_data import VALID_PUBLIC_PORTAL, INVALID_EMAIL_ADDRESS, INVALID_MOBILE_NUMBER
+from data.public_entry_data import VALID_PUBLIC_PORTAL, INVALID_EMAIL_ADDRESS, INVALID_MOBILE_NUMBER, INVALID_VENDOR_DETAILS
 from data.login_data import VALID_DATA
 from pages.login_page import LoginPage
 from pages.register_entry import RegisterEntry
@@ -112,5 +112,41 @@ class TestPublicPortal:
 
             else:
                 assert_true(self.public_portal.is_element_visible(self.public_portal.INVALID_PHONE_ERROR),f"No error message displayed for invalid mobile number '{invalid_mobile["mobile_number"]}'","invalid_mobile_number", self.public_portal)
+
+
+    @allure.title("Testing the invalid vendor details")
+    @pytest.mark.parametrize("invalid_vendor",INVALID_VENDOR_DETAILS)
+    def test_invalid_vendor_details(self, invalid_vendor):
+        with allure.step("Navigating to the sales events"):
+            self.public_portal.navigate_to_sales()
+            self.public_portal.click_element(self.public_portal.CONTINUE_BUTTON)
+
+        with allure.step("Fill up email_address"):
+            self.public_portal.fill_email(invalid_vendor["email_address"])
+            self.public_portal.click_element(self.public_portal.CONTINUE_BUTTON)
+
+        with allure.step("Fill up otp"):
+            self.public_portal.fill_otp()
+
+        with allure.step("Fill up mobile number"):
+            self.public_portal.fill_mobile_number(invalid_vendor["mobile_number"])
+            self.public_portal.click_element(self.public_portal.CONTINUE_BUTTON)
+
+        with allure.step("Filling up vendor details"):
+            self.public_portal.fill_vendor_details(invalid_vendor["first_name"], invalid_vendor["last_name"], invalid_vendor["address_1"], invalid_vendor["town"], invalid_vendor["postcode"], invalid_vendor["eq_number"], invalid_vendor["formal_title"], invalid_vendor["county"], invalid_vendor["country"])
+            self.public_portal.enter_text(self.public_portal.ADDRESS_LINE_2,invalid_vendor["address_2"])
+            self.public_portal.enter_text(self.public_portal.BUSINESS_NAME, invalid_vendor["business_name"])
+            
+            if(invalid_vendor["flat_farmer"]=="Yes"):
+                self.public_portal.click_element(self.public_portal.FLAT_RATED_YES)
+                self.public_portal.enter_text(self.public_portal.PPS_NUMBER,invalid_vendor["pps_number"])
+
+            if (invalid_vendor["vat_farmer"]=="Yes"):
+                self.public_portal.click_element(self.public_portal.VAT_REGISTERED_YES)
+                self.public_portal.enter_text(self.public_portal.VAT_NUMBER, invalid_vendor["vat_number"])
+
+
+        with allure.step("Assertion"):
+            assert_false(self.public_portal.is_element_clickable(self.public_portal.NEXT_STEP_BUTTON),"Invalid vendor details allowed", "invalid_vendor_details", self.public_portal)
 
 

@@ -13,16 +13,16 @@ class PublicPortal(BasePage):
     VERIFY_CODE_BUTTON = (By.XPATH,"//button[normalize-space()='Verify code']")
     MOBILE_NUMBER_INPUT = (By.XPATH,"//input[@placeholder='87 123 4567']")
     NEXT_STEP_BUTTON = (By.XPATH,"//button[normalize-space()='Next step']")
-    FORMAL_TITLE_DROPDOWN = (By.XPATH,"//button[.//span[normalize-space()='Please select...']]")
+    FORMAL_TITLE_DROPDOWN = (By.XPATH,"//label[.//span[contains(text(),'Formal title')]]//following-sibling::button")
     FORMAL_TITLE = (By.XPATH,"//button[normalize-space()='Mr.']")
     FIRST_NAME_INPUT = (By.XPATH,"//input[@placeholder='First name  ']")
     LAST_NAME_INPUT = (By.XPATH,"//input[@placeholder='Surname  ']")
     ADDRESS_LINE_1_INPUT = (By.XPATH,"//input[@name='address.addressLine1']")
     TOWN_INPUT = (By.XPATH,"//input[@placeholder='Town / City  ']")
-    COUNTY_DROPDOWN = (By.XPATH,"(//span[normalize-space()='Please select...'])[1]")
+    COUNTY_DROPDOWN = (By.XPATH,"//label[.//span[contains(text(),'County')]]//following-sibling::button")
     COUNTY = (By.XPATH,"//button[normalize-space()='Carlow']")
     POSTCODE_INPUT = (By.XPATH,"//input[@placeholder='Eircode / Postcode  ']")
-    COUNTRY_DROPDOWN = (By.XPATH,"//span[normalize-space()='Please select...']")
+    COUNTRY_DROPDOWN = (By.XPATH,"//label[.//span[contains(text(),'Country')]]//following-sibling::button")
     COUNTRY = (By.XPATH,"//button[normalize-space()='Ireland']")
     EQUINE_PREMISES_NUMBER_INPUT= (By.XPATH,"//input[@placeholder='Equine premises number  ']")
     DOCUMENT_LATER = (By.XPATH, "//button[normalize-space()='I WILL UPLOAD THESE LATER']")
@@ -62,6 +62,12 @@ class PublicPortal(BasePage):
     SALES = (By.XPATH,"//span[normalize-space()='Sales']")
     INVALID_PHONE_ERROR = (By.XPATH,"//p[contains(@class,'text-red-500') and contains(@class,'text-xs') and contains(@class,'font-medium')]")
     CARD_NAME=(By.XPATH,"//input[@placeholder='John Doe']")
+    ADDRESS_LINE_2 = (By.NAME,"address.addressLine2")
+    BUSINESS_NAME = (By.NAME,"businessName")
+    VAT_NUMBER = (By.NAME,"vatRegistrationNumber")
+    PPS_NUMBER = (By.NAME,"ppsNumber")
+    FLAT_RATED_YES = (By.XPATH,"(//label[normalize-space()='Yes'])[1]"),
+    VAT_REGISTERED_YES = (By.XPATH,"(//label[normalize-space()='Yes'])[2]")
 
 
 
@@ -103,6 +109,7 @@ class PublicPortal(BasePage):
         if county is not None:
             self.click_element(self.COUNTY_DROPDOWN)
             self.click_element(self.COUNTY)
+
         self.enter_text(self.POSTCODE_INPUT, postcode)
 
         if country is not None:
