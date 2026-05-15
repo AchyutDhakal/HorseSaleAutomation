@@ -61,13 +61,14 @@ class PublicPortal(BasePage):
     PRESALE = (By.XPATH, "//span[normalize-space()='Pre-Sale']")
     SALES = (By.XPATH,"//span[normalize-space()='Sales']")
     INVALID_PHONE_ERROR = (By.XPATH,"//p[contains(@class,'text-red-500') and contains(@class,'text-xs') and contains(@class,'font-medium')]")
+    CARD_NAME=(By.XPATH,"//input[@placeholder='John Doe']")
 
 
 
     def __init__(self, driver):
         super().__init__(driver)
 
-    def navigate_to_entry_form(self, email_address, mobile_number):
+    def navigate_to_sales(self):
         self.click_element(self.ENTER_HORSE_BUTTON)
 
         if(self.is_element_clickable(self.EVENT)==False):
@@ -75,14 +76,17 @@ class PublicPortal(BasePage):
         
         else:
             self.event_text = self.get_element_text(self.EVENT).splitlines()[0]
-            print(self.event_text)
             self.click_element(self.EVENT)
+        self.click_element(self.CONTINUE_BUTTON)
 
-        self.click_element(self.CONTINUE_BUTTON)
+    def fill_email(self, email_address):
         self.enter_text(self.EMAIL_INPUT,email_address)
-        self.click_element(self.CONTINUE_BUTTON)
+
+    def fill_otp(self):
         self.enter_otp(self.EMAIL_OTP_INPUTS,get_otp_from_email())
         self.click_element(self.VERIFY_CODE_BUTTON)
+
+    def fill_mobile_number(self, mobile_number):
         self.enter_text(self.MOBILE_NUMBER_INPUT, mobile_number)
         self.click_element(self.NEXT_STEP_BUTTON)
 
@@ -107,9 +111,10 @@ class PublicPortal(BasePage):
         self.enter_text(self.EQUINE_PREMISES_NUMBER_INPUT, eq_number)
 
 
-    def fill_card_details(self):
+    def fill_card_details(self, card_name):
         self.click_element(self.TERMS_AND_CONDITION_CHECKBOX)
         self.click_element(self.PRIVACY_POLICY_CHECKBOX)
+        self.enter_text(self.CARD_NAME, card_name)
         self.enter_text(self.CARD_NUMBER_INPUT, CARD_NUMBER)
         self.enter_text(self.EXPIRY_MONTH_INPUT, EXPIRY_MONTH)
         self.enter_text(self.EXPIRY_YEAR_INPUT, EXPIRY_YEAR)

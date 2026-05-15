@@ -14,7 +14,7 @@ class BasePage:
     # OVERLAY = (By.XPATH, "//div[contains(@class,'backdrop-blur-sm') and contains(@class,'opacity-100')]")
     def __init__(self,driver):
         self.driver = driver
-        self.wait = WebDriverWait(driver,10)
+        self.wait = WebDriverWait(driver,15)
     
     def find_element(self,locator):
         return self.wait.until(EC.presence_of_element_located(locator))

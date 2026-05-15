@@ -22,7 +22,7 @@ class CreateSalesPage(BasePage):
     POPUP_OVERLAY = (By.CSS_SELECTOR, "div.absolute.inset-0")
     EVENT_TITLE = (By.XPATH, "//h1[contains(@class,'tracking-tight') and contains(@class,'text-zinc-900')]")
     FINANCIAL = (By.XPATH,"//p[normalize-space()='Financial']")
-    ENTRY_FEE_INPUT = (By.XPATH,"(//input[@type='number'])[1]")
+    ENTRY_FEE_INPUT = (By.XPATH,"//input[contains(@class,'w-[90px]')]/following-sibling::span[normalize-space()='€']/preceding-sibling::input")
 
     def __init__(self, driver):
         super().__init__(driver)
