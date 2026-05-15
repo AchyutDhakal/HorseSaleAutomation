@@ -90,14 +90,13 @@ class TestPublicPortal:
 
 
     @allure.title("Testing invalid mobile number")
-    @pytest.mark.parametrize("valid_data", VALID_PUBLIC_PORTAL)
     @pytest.mark.parametrize("invalid_mobile", INVALID_MOBILE_NUMBER)
-    def test_invalid_mobile_number(self, valid_data, invalid_mobile):
+    def test_invalid_mobile_number(self, invalid_mobile):
         with allure.step("Navigating to the sales"):
             self.public_portal.navigate_to_sales()
 
         with allure.step("Filling up email"):
-            self.public_portal.fill_email(valid_data["email_address"])
+            self.public_portal.fill_email(invalid_mobile["email_address"])
             self.public_portal.click_element(self.public_portal.CONTINUE_BUTTON)
 
         with allure.step("Filing up otp"):
@@ -107,6 +106,11 @@ class TestPublicPortal:
             self.public_portal.fill_mobile_number(invalid_mobile["mobile_number"])
 
         with allure.step("Assertion"):
-            pass
+            if (len(invalid_mobile["mobile_number"]) == 0):
+                self.public_portal.click_element(self.public_portal.CONTINUE_BUTTON)
+                assert_true(self.public_portal.is_element_visible(self.public_portal.INVALID_PHONE_ERROR),"No error message displayed for invalid mobile number","invalid_mobile_number", self.public_portal)
+
+            else:
+                assert_true(self.public_portal.is_element_visible(self.public_portal.INVALID_PHONE_ERROR),f"No error message displayed for invalid mobile number '{invalid_mobile["mobile_number"]}'","invalid_mobile_number", self.public_portal)
 
 

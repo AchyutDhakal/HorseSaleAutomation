@@ -375,19 +375,24 @@ INVALID_EMAIL_ADDRESS=[
 ]
 
 INVALID_MOBILE_NUMBER= [
-    {
+    {   
+        "email_address":f"{split_email[0]}+{int(time.time())}@{split_email[1]}",
         "mobile_number":""
     },
     {
+        "email_address":f"{split_email[0]}+{int(time.time())}@{split_email[1]}",
         "mobile_number":"2"
     },
     {
-        "mobile_number":1567451524874154845156487212120548510205485478121545005248512154515485124184521854521564561231564515484874878745156485485485
+        "email_address":f"{split_email[0]}+{int(time.time())}@{split_email[1]}",
+        "mobile_number":"1567451524874154845156487212120548510205485478121545005248512154515485124184521854521564561231564515484874878745156485485485"
     },
     {
+        "email_address":f"{split_email[0]}+{int(time.time())}@{split_email[1]}",
         "mobile_number":"fdafkdafjd"
     },
     {
+        "email_address":f"{split_email[0]}+{int(time.time())}@{split_email[1]}",
         "mobile_number":"15644 156444"
     }
 ]
