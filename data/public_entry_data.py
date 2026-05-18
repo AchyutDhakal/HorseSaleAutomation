@@ -18,8 +18,8 @@ VALID_PUBLIC_PORTAL = [
     {
         "email_address":f"{split_email[0]}+{int(time.time()+0)}@{split_email[1]}",
         "mobile_number": generate_unique_mobile(),
-        "firstName":"Random",
-        "lastName":"Person",
+        "firstName":"Daenareys",
+        "lastName":"Targaryen",
         "address.addressLine1":"kathmandu, Nepal",
         "address.townCity":"Kathmandu",
         "address.postcode":257489,
@@ -930,5 +930,162 @@ INVALID_VENDOR_DETAILS = [
         "vat_number":"",
         "county":"",
         "country":None
+    }
+]
+
+
+INVALID_HORSE_DETAILS =[
+    {
+        "horses[0].horse.sectionCategory":None,
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"156484",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"2025"
+    },
+    {
+        "horses[0].horse.horseName":"",
+        "horses[0].horse.registrationNumber":"156484",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"2025"
+    },
+    {
+        "horses[0].horse.horseName":"Labore magna cupidatat ad qui aliquip aliquip minim ex aute culpa consequat. Dolore esse fugiat elit ipsum Lorem id in. Laboris eu nulla culpa veniam laborum. Deserunt velit fugiat quis dolore magna proident qui elit esse irure sit magna veniam. Aliqua ad est dolore dolor Lorem laborum adipisicing proident.Qui ad excepteur Lorem ullamco nisi. Velit mollit magna ea magna culpa duis nostrud. Occaecat nisi consequat minim culpa consequat commodo. Sit anim dolore voluptate laboris culpa ipsum minim consectetur Lorem ad consequat officia velit nisi. Ad ex et ullamco aliqua.",
+        "horses[0].horse.registrationNumber":"156484",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"2025"
+    },
+    {
+        "horses[0].horse.horseName":"j",
+        "horses[0].horse.registrationNumber":"156484",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"2025"
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"2025"
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"Amet proident tempor dolor fugiat cillum laboris ea mollit. Ea nostrud do do pariatur duis ex cillum duis reprehenderit voluptate adipisicing velit. Id et ullamco ut exercitation eu est adipisicing. Amet pariatur magna amet in aliqua id ut aute ex pariatur dolor velit. Aute dolore ut laboris ea dolor qui quis aliquip proident eu eu. Laborum voluptate incididunt dolore laboris sit cupidatat culpa ut. Irure aute laborum dolore et ut duis proident cillum deserunt commodo nulla.Lorem eiusmod et aliqua officia ut ut ad in nulla id est qui officia sint. Laboris qui consequat laboris nisi duis id irure incididunt. Ex quis voluptate labore dolore incididunt mollit et magna culpa id. Lorem nulla eiusmod dolore veniam ullamco excepteur laborum. Anim ullamco pariatur reprehenderit pariatur reprehenderit reprehenderit do esse ut. Consequat anim voluptate minim ea amet esse adipisicing ullamco consequat aliqua ipsum. Laborum sint consequat cillum dolore Lorem.",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"2025"
+    }, 
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"f",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"2025"
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"156484",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"2025",
+        "horses[0].horse.sex":None
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"2025",
+        "horses[0].horse.age": None
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"2025",
+        "horses[0].horse.colour": None
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"2025",
+        "horses[0].horse.height": None
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"2025",
+        "horses[0].horse.countryOfOrigin": None
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":""
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"fafea"
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"0000"
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"154815614848"
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"1"
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"20 25"
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"2025",
+        "horses[0].horse.class": None
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"2025",
+        "horses[0].horse.hwsdStatus": None
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":future_date,
+        "Select year":"2025"
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":None,
+        "Select year":"2025"
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":"00-00-0000",
+        "Select year":"2025"
+    },
+    {
+        "horses[0].horse.horseName":"Random Horse",
+        "horses[0].horse.registrationNumber":"1542f",
+        "horses[0].horse.dateOfBirth":past_date,
+        "Select year":"2025",
+        "horses[0].horse.breeding.sire":""
     }
 ]

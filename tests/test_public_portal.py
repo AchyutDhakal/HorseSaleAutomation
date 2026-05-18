@@ -145,7 +145,6 @@ class TestPublicPortal:
                 self.public_portal.click_element(self.public_portal.VAT_REGISTERED_YES)
                 self.public_portal.enter_text(self.public_portal.VAT_NUMBER, invalid_vendor["vat_number"])
 
-
         with allure.step("Assertion"):
             assert_false(self.public_portal.is_element_clickable(self.public_portal.NEXT_STEP_BUTTON),"Invalid vendor details allowed", "invalid_vendor_details", self.public_portal)
 
