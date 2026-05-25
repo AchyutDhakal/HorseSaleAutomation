@@ -69,6 +69,7 @@ class PublicPortal(BasePage):
     FLAT_RATED_YES = (By.CSS_SELECTOR,"input[name='flat_farm'][value='yes']"),
     VAT_REGISTERED_YES = (By.CSS_SELECTOR,"input[name='vat_farm'][value='yes']")
     COMPLETE_LATER_BUTTON = (By.XPATH,"//button[normalize-space()='Complete Later']")
+    DISCLAIMER = (By.XPATH,"//h4[text()='Disclaimer']")
 
 
 

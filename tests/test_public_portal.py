@@ -2,7 +2,7 @@ from utils.test_runner import create_driver
 from pages.public_portal import PublicPortal
 import allure
 import pytest
-from data.public_entry_data import VALID_PUBLIC_PORTAL, INVALID_EMAIL_ADDRESS, INVALID_MOBILE_NUMBER, INVALID_VENDOR_DETAILS
+from data.public_entry_data import VALID_PUBLIC_PORTAL, INVALID_EMAIL_ADDRESS, INVALID_MOBILE_NUMBER, INVALID_VENDOR_DETAILS, INVALID_HORSE_DETAILS
 from data.login_data import VALID_DATA
 from pages.login_page import LoginPage
 from pages.register_entry import RegisterEntry
@@ -150,5 +150,39 @@ class TestPublicPortal:
 
         with allure.step("Assertion"):
             assert_false(self.public_portal.is_element_clickable(self.public_portal.NEXT_STEP_BUTTON),"Invalid vendor details allowed", "invalid_vendor_details", self.public_portal)
+
+
+    @allure.title("Testing invalid horse details")
+    @pytest.mark.parametrize("invalid_horse", INVALID_HORSE_DETAILS)
+    def test_invalid_horse_details(self, invalid_horse):
+        with allure.step("Navigating to the sales events"):
+            self.public_portal.navigate_to_sales()
+            self.public_portal.click_element(self.public_portal.CONTINUE_BUTTON)
+
+        with allure.step("Fill up email_address"):
+            self.public_portal.fill_email(invalid_horse["email_address"])
+            self.public_portal.click_element(self.public_portal.CONTINUE_BUTTON)
+
+        with allure.step("Fill up otp"):
+            self.public_portal.fill_otp()
+
+        with allure.step("Fill up mobile number"):
+            self.public_portal.fill_mobile_number(invalid_horse["mobile_number"])
+            self.public_portal.click_element(self.public_portal.CONTINUE_BUTTON)
+
+        with allure.step("Filling up vendor details"):
+            self.public_portal.fill_vendor_details(invalid_horse["firstName"], invalid_horse["lastName"], invalid_horse["address.addressLine1"], invalid_horse["address.townCity"], invalid_horse["address.postcode"], invalid_horse["equinePremisesNumber"], invalid_horse["formal_title"], invalid_horse["county"], invalid_horse["country"])
+            self.public_portal.click_element(self.public_portal.NEXT_STEP_BUTTON)
+   
+        with allure.step("Clicking on upload documents later"):
+            self.public_portal.click_element(self.public_portal.DOCUMENT_LATER)
+            self.public_portal.click_element(self.public_portal.COMPLETE_LATER_BUTTON)
+
+        with allure.step("Filling up horse details"):
+            self.public_portal.fill_form_dynamically(invalid_horse)
+            self.public_portal.click_element(self.public_portal.NEXT_STEP_BUTTON)
+        
+        with allure.step("Assertion"):
+            assert_false(self.public_portal.is_element_present(self.public_portal.DISCLAIMER), "Invalid horse data allowed", "invalid_horse_details", self.public_portal )
 
 
