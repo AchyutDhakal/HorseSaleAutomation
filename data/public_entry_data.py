@@ -41,7 +41,8 @@ VALID_PUBLIC_PORTAL = [
         "card_name":"John Snow",
         "horses[0].horse.foalDetails.horseName":f"random_foal_{int(time.time())}",
         "horses[0].horse.foalDetails.registrationNumber":265588,
-        "horses[0].horse.foalDetails.dateOfBirth":past_date
+        "horses[0].horse.foalDetails.dateOfBirth":past_date,
+        "horses[0].horse.performance.stageOfLunging": None
     },
     {
         "email_address":f"{split_email[0]}+{int(time.time()+1)}@{split_email[1]}",
@@ -69,7 +70,8 @@ VALID_PUBLIC_PORTAL = [
         "card_name":"John Snow",
         "horses[0].horse.foalDetails.horseName":f"random_foal_{int(time.time())}",
         "horses[0].horse.foalDetails.registrationNumber":265588,
-        "horses[0].horse.foalDetails.dateOfBirth":past_date
+        "horses[0].horse.foalDetails.dateOfBirth":past_date,
+        "horses[0].horse.performance.stageOfLunging": None
     },
     {
         "email_address":f"{split_email[0]}+{int(time.time()+2)}@{split_email[1]}",
@@ -97,7 +99,8 @@ VALID_PUBLIC_PORTAL = [
         "card_name":"John Snow",
         "horses[0].horse.foalDetails.horseName":f"random_foal_{int(time.time())}",
         "horses[0].horse.foalDetails.registrationNumber":265588,
-        "horses[0].horse.foalDetails.dateOfBirth":past_date
+        "horses[0].horse.foalDetails.dateOfBirth":past_date,
+        "horses[0].horse.performance.stageOfLunging": None
     },
     {
         "email_address":f"{split_email[0]}+{int(time.time()+3)}@{split_email[1]}",
@@ -125,7 +128,8 @@ VALID_PUBLIC_PORTAL = [
         "card_name":"John Snow",
         "horses[0].horse.foalDetails.horseName":f"random_foal_{int(time.time())}",
         "horses[0].horse.foalDetails.registrationNumber":265588,
-        "horses[0].horse.foalDetails.dateOfBirth":past_date
+        "horses[0].horse.foalDetails.dateOfBirth":past_date,
+        "horses[0].horse.performance.stageOfLunging": None
     },
     {
         "email_address":f"{split_email[0]}+{int(time.time()+4)}@{split_email[1]}",
@@ -136,7 +140,7 @@ VALID_PUBLIC_PORTAL = [
         "address.townCity":"Kathmandu",
         "address.postcode":257489,
         "equinePremisesNumber":25466335,
-        "horses[0].horse.sectionCategory":"2yo",
+        "horses[0].horse.sectionCategory":"3 year old",
         "horses[0].horse.horseName":f"Random Horse_{int(time.time())}",
         "horses[0].horse.registrationNumber":369874512369,
         "horses[0].horse.performance.additionalPerformanceDetails":"Est exercitation aliqua eiusmod adipisicing cillum sunt ipsum proident fugiat laboris qui. Fugiat quis veniam aliqua officia aliqua qui do laborum Lorem.",
@@ -153,7 +157,8 @@ VALID_PUBLIC_PORTAL = [
         "card_name":"John Snow",
         "horses[0].horse.foalDetails.horseName":f"random_foal_{int(time.time())}",
         "horses[0].horse.foalDetails.registrationNumber":265588,
-        "horses[0].horse.foalDetails.dateOfBirth":past_date
+        "horses[0].horse.foalDetails.dateOfBirth":past_date,
+        "horses[0].horse.performance.stageOfLunging": None
     },
     {
         "email_address":f"{split_email[0]}+{int(time.time()+5)}@{split_email[1]}",
@@ -164,7 +169,7 @@ VALID_PUBLIC_PORTAL = [
         "address.townCity":"Kathmandu",
         "address.postcode":257489,
         "equinePremisesNumber":25466335,
-        "horses[0].horse.sectionCategory":"3yo",
+        "horses[0].horse.sectionCategory":"2 year old",
         "horses[0].horse.horseName":f"Random Horse_{int(time.time())}",
         "horses[0].horse.registrationNumber":369874512369,
         "horses[0].horse.performance.additionalPerformanceDetails":"Est exercitation aliqua eiusmod adipisicing cillum sunt ipsum proident fugiat laboris qui. Fugiat quis veniam aliqua officia aliqua qui do laborum Lorem.",
@@ -181,7 +186,8 @@ VALID_PUBLIC_PORTAL = [
         "card_name":"John Snow",
         "horses[0].horse.foalDetails.horseName":f"random_foal_{int(time.time())}",
         "horses[0].horse.foalDetails.registrationNumber":265588,
-        "horses[0].horse.foalDetails.dateOfBirth":past_date
+        "horses[0].horse.foalDetails.dateOfBirth":past_date,
+        "horses[0].horse.performance.stageOfLunging": None
     },
     {
         "email_address":f"{split_email[0]}+{int(time.time()+6)}@{split_email[1]}",
@@ -192,7 +198,7 @@ VALID_PUBLIC_PORTAL = [
         "address.townCity":"Kathmandu",
         "address.postcode":257489,
         "equinePremisesNumber":25466335,
-        "horses[0].horse.sectionCategory":"4yo",
+        "horses[0].horse.sectionCategory":"4 year old",
         "horses[0].horse.horseName":f"Random Horse_{int(time.time())}",
         "horses[0].horse.registrationNumber":369874512369,
         "horses[0].horse.performance.additionalPerformanceDetails":"Est exercitation aliqua eiusmod adipisicing cillum sunt ipsum proident fugiat laboris qui. Fugiat quis veniam aliqua officia aliqua qui do laborum Lorem.",
@@ -209,7 +215,8 @@ VALID_PUBLIC_PORTAL = [
         "card_name":"John Snow",
         "horses[0].horse.foalDetails.horseName":f"random_foal_{int(time.time())}",
         "horses[0].horse.foalDetails.registrationNumber":265588,
-        "horses[0].horse.foalDetails.dateOfBirth":past_date
+        "horses[0].horse.foalDetails.dateOfBirth":past_date,
+        "horses[0].horse.performance.stageOfLunging": None
     },
     {
         "email_address":f"{split_email[0]}+{int(time.time()+7)}@{split_email[1]}",
@@ -220,7 +227,7 @@ VALID_PUBLIC_PORTAL = [
         "address.townCity":"Kathmandu",
         "address.postcode":257489,
         "equinePremisesNumber":25466335,
-        "horses[0].horse.sectionCategory":"5yo+",
+        "horses[0].horse.sectionCategory":"5 year old & upwards",
         "horses[0].horse.horseName":f"Random Horse_{int(time.time())}",
         "horses[0].horse.registrationNumber":369874512369,
         "horses[0].horse.performance.additionalPerformanceDetails":"Est exercitation aliqua eiusmod adipisicing cillum sunt ipsum proident fugiat laboris qui. Fugiat quis veniam aliqua officia aliqua qui do laborum Lorem.",
@@ -237,7 +244,8 @@ VALID_PUBLIC_PORTAL = [
         "card_name":"John Snow",
         "horses[0].horse.foalDetails.horseName":f"random_foal_{int(time.time())}",
         "horses[0].horse.foalDetails.registrationNumber":265588,
-        "horses[0].horse.foalDetails.dateOfBirth":past_date
+        "horses[0].horse.foalDetails.dateOfBirth":past_date,
+        "horses[0].horse.performance.stageOfLunging": None
     },
     {
         "email_address":f"{split_email[0]}+{int(time.time()+8)}@{split_email[1]}",
@@ -265,7 +273,8 @@ VALID_PUBLIC_PORTAL = [
         "card_name":"John Snow",
         "horses[0].horse.foalDetails.horseName":f"random_foal_{int(time.time())}",
         "horses[0].horse.foalDetails.registrationNumber":265588,
-        "horses[0].horse.foalDetails.dateOfBirth":past_date
+        "horses[0].horse.foalDetails.dateOfBirth":past_date,
+        "horses[0].horse.performance.stageOfLunging": None
     },
     {
         "email_address":f"{split_email[0]}+{int(time.time()+9)}@{split_email[1]}",
@@ -293,7 +302,8 @@ VALID_PUBLIC_PORTAL = [
         "card_name":"John Snow",
         "horses[0].horse.foalDetails.horseName":f"random_foal_{int(time.time())}",
         "horses[0].horse.foalDetails.registrationNumber":265588,
-        "horses[0].horse.foalDetails.dateOfBirth":past_date
+        "horses[0].horse.foalDetails.dateOfBirth":past_date,
+        "horses[0].horse.performance.stageOfLunging": None
     },
     {
         "email_address":f"{split_email[0]}+{int(time.time()+10)}@{split_email[1]}",
@@ -321,7 +331,8 @@ VALID_PUBLIC_PORTAL = [
         "card_name":"John Snow",
         "horses[0].horse.foalDetails.horseName":f"random_foal_{int(time.time())}",
         "horses[0].horse.foalDetails.registrationNumber":265588,
-        "horses[0].horse.foalDetails.dateOfBirth":past_date
+        "horses[0].horse.foalDetails.dateOfBirth":past_date,
+        "horses[0].horse.performance.stageOfLunging": None
     },
     {
         "email_address":f"{split_email[0]}+{int(time.time()+11)}@{split_email[1]}",
@@ -349,7 +360,8 @@ VALID_PUBLIC_PORTAL = [
         "card_name":"John Snow",
         "horses[0].horse.foalDetails.horseName":f"random_foal_{int(time.time())}",
         "horses[0].horse.foalDetails.registrationNumber":265588,
-        "horses[0].horse.foalDetails.dateOfBirth":past_date
+        "horses[0].horse.foalDetails.dateOfBirth":past_date,
+        "horses[0].horse.performance.stageOfLunging": None
     }
 ]
 
@@ -412,9 +424,9 @@ INVALID_VENDOR_DETAILS = [
         "business_name":"ghoda enterprises",
         "eq_number":"1564848",
         "flat_farmer":"No",
-        "vat_farmer":"No",
-        "pps_number":"",
-        "vat_number":"",
+        "vat_farmer":"Yes",
+        "pps_number":"feawfeawfe",
+        "vat_number":"fjdkds",
         "county":"",
         "country":""
     },

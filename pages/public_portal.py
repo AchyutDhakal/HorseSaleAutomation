@@ -66,8 +66,9 @@ class PublicPortal(BasePage):
     BUSINESS_NAME = (By.NAME,"businessName")
     VAT_NUMBER = (By.NAME,"vatRegistrationNumber")
     PPS_NUMBER = (By.NAME,"ppsNumber")
-    FLAT_RATED_YES = (By.XPATH,"(//label[normalize-space()='Yes'])[1]"),
-    VAT_REGISTERED_YES = (By.XPATH,"(//label[normalize-space()='Yes'])[2]")
+    FLAT_RATED_YES = (By.CSS_SELECTOR,"input[name='flat_farm'][value='yes']"),
+    VAT_REGISTERED_YES = (By.CSS_SELECTOR,"input[name='vat_farm'][value='yes']")
+    COMPLETE_LATER_BUTTON = (By.XPATH,"//button[normalize-space()='Complete Later']")
 
 
 

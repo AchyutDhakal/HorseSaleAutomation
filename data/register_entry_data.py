@@ -21,7 +21,8 @@ ENTRY_DATA = [
         "sectionCategory":"Ponies",
         "horse.foalDetails.name":"random_foal",
         "horse.foalDetails.registrationNumber":215454,
-        "horse.foalDetails.dateOfBirth": past_date
+        "horse.foalDetails.dateOfBirth": past_date,
+        "StageOfLunging":None
     },
     {
         "horse.registrationNumber":12548587866,
@@ -37,7 +38,8 @@ ENTRY_DATA = [
         "sectionCategory":"Connemara",
         "horse.foalDetails.name":"random_foal",
         "horse.foalDetails.registrationNumber":215454,
-        "horse.foalDetails.dateOfBirth": past_date
+        "horse.foalDetails.dateOfBirth": past_date,
+        "StageOfLunging":None
     },
     {
         "horse.registrationNumber":12548587866,
@@ -53,7 +55,8 @@ ENTRY_DATA = [
         "sectionCategory":"Foal",
         "horse.foalDetails.name":"random_foal",
         "horse.foalDetails.registrationNumber":215454,
-        "horse.foalDetails.dateOfBirth": past_date
+        "horse.foalDetails.dateOfBirth": past_date,
+        "StageOfLunging":None
     },
     {
         "horse.registrationNumber":12548587866,
@@ -69,7 +72,8 @@ ENTRY_DATA = [
         "sectionCategory":"Yearling",
         "horse.foalDetails.name":"random_foal",
         "horse.foalDetails.registrationNumber":215454,
-        "horse.foalDetails.dateOfBirth": past_date
+        "horse.foalDetails.dateOfBirth": past_date,
+        "StageOfLunging":None
     },
     {
         "horse.registrationNumber":12548587866,
@@ -82,10 +86,11 @@ ENTRY_DATA = [
         "breeding":"Yes",
         "consignor":"Yes",
         "disease_test":"No",
-        "sectionCategory":"2yo",
+        "sectionCategory":"3 year old",
         "horse.foalDetails.name":"random_foal",
         "horse.foalDetails.registrationNumber":215454,
-        "horse.foalDetails.dateOfBirth": past_date
+        "horse.foalDetails.dateOfBirth": past_date,
+        "StageOfLunging":None
     },
     {
         "horse.registrationNumber":12548587866,
@@ -98,10 +103,11 @@ ENTRY_DATA = [
         "breeding":"Yes",
         "consignor":"Yes",
         "disease_test":"No",
-        "sectionCategory":"3yo",
+        "sectionCategory":"2 year old",
         "horse.foalDetails.name":"random_foal",
         "horse.foalDetails.registrationNumber":215454,
-        "horse.foalDetails.dateOfBirth": past_date
+        "horse.foalDetails.dateOfBirth": past_date,
+        "StageOfLunging":None
     },
     {
         "horse.registrationNumber":12548587866,
@@ -114,10 +120,11 @@ ENTRY_DATA = [
         "breeding":"Yes",
         "consignor":"Yes",
         "disease_test":"No",
-        "sectionCategory":"4yo",
+        "sectionCategory":"4 year old",
         "horse.foalDetails.name":"random_foal",
         "horse.foalDetails.registrationNumber":215454,
-        "horse.foalDetails.dateOfBirth": past_date
+        "horse.foalDetails.dateOfBirth": past_date,
+        "StageOfLunging":None
     },
     {
         "horse.registrationNumber":12548587866,
@@ -130,10 +137,11 @@ ENTRY_DATA = [
         "breeding":"Yes",
         "consignor":"Yes",
         "disease_test":"No",
-        "sectionCategory":"5yo+",
+        "sectionCategory":"5 year old & upwards",
         "horse.foalDetails.name":"random_foal",
         "horse.foalDetails.registrationNumber":215454,
-        "horse.foalDetails.dateOfBirth": past_date
+        "horse.foalDetails.dateOfBirth": past_date,
+        "StageOfLunging":None
     },
     {
         "horse.registrationNumber":12548587866,
@@ -149,7 +157,8 @@ ENTRY_DATA = [
         "sectionCategory":"PointToPoint",
         "horse.foalDetails.name":"random_foal",
         "horse.foalDetails.registrationNumber":215454,
-        "horse.foalDetails.dateOfBirth": past_date
+        "horse.foalDetails.dateOfBirth": past_date,
+        "StageOfLunging":None
     },
     {
         "horse.registrationNumber":12548587866,
@@ -165,7 +174,8 @@ ENTRY_DATA = [
         "sectionCategory":"Store",
         "horse.foalDetails.name":"random_foal",
         "horse.foalDetails.registrationNumber":215454,
-        "horse.foalDetails.dateOfBirth": past_date
+        "horse.foalDetails.dateOfBirth": past_date,
+        "StageOfLunging":None
     },
     {
         "horse.registrationNumber":12548587866,
@@ -181,7 +191,8 @@ ENTRY_DATA = [
         "sectionCategory":"Broodmare",
         "horse.foalDetails.name":"random_foal",
         "horse.foalDetails.registrationNumber":215454,
-        "horse.foalDetails.dateOfBirth": past_date
+        "horse.foalDetails.dateOfBirth": past_date,
+        "StageOfLunging":None
     },
     {
         "horse.registrationNumber":12548587866,
@@ -197,7 +208,8 @@ ENTRY_DATA = [
         "sectionCategory":"BroodmareWithFoal",
         "horse.foalDetails.name":"random_foal",
         "horse.foalDetails.registrationNumber":215454,
-        "horse.foalDetails.dateOfBirth": past_date
+        "horse.foalDetails.dateOfBirth": past_date,
+        "StageOfLunging":None
     }
 ]
 
