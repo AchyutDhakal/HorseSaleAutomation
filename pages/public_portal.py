@@ -10,7 +10,7 @@ class PublicPortal(BasePage):
     EVENT = (By.XPATH,"//button[.//span[contains(@class,'font-bold') and contains(@class,'text-[14px]')]][1]")
     CONTINUE_BUTTON =(By.XPATH,"//button[normalize-space()='Continue']")
     EMAIL_INPUT = (By.XPATH,"//input[@type='email']")
-    VERIFY_CODE_BUTTON = (By.XPATH,"//button[normalize-space()='Verify code']")
+    VERIFY_CODE_BUTTON = (By.XPATH,"//button[normalize-space()='Verify']")
     MOBILE_NUMBER_INPUT = (By.XPATH,"//input[@placeholder='87 123 4567']")
     NEXT_STEP_BUTTON = (By.XPATH,"//button[normalize-space()='Next step']")
     FORMAL_TITLE_DROPDOWN = (By.XPATH,"//label[.//span[contains(text(),'Formal title')]]//following-sibling::button")
@@ -44,7 +44,7 @@ class PublicPortal(BasePage):
     CVV_INPUT = (By.XPATH,"//input[@placeholder='123']")
     FINALIZE_ENTRY_BUTTON = (By.XPATH,"//button[contains(normalize-space(),'Finalise entry')]")
     OTP_INPUT = (By.ID,"otp")
-    EMAIL_OTP_INPUTS = (By.XPATH, "//input[@inputmode='numeric' and @type='tel']")
+    EMAIL_OTP_INPUTS = (By.CSS_SELECTOR, "input[maxlength='1'][inputmode='numeric']")
     HEIGHT = "horses[0].horse.height"
     AGE = "horses[0].horse.age"
     VERIFY_AND_CONTINUE_BUTTON = (By.ID,"verify-btn")
