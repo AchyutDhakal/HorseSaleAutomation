@@ -28,7 +28,7 @@ class AddVendor(BasePage):
     FLAT_RATED_FARMER_YES = (By.XPATH,"//label[normalize-space()='Yes']/input[@name='flatRatedFarmer']")
     VAT_REGISTERED_FARMER_YES = (By.XPATH,"//label[normalize-space()='Yes']/input[@name='vatRegisteredFarmer']")
     PPS_NUMBER = (By.NAME,"ppsNumber")
-    VAT_NUMBER = (By.XPATH,"vatRegistrationNumber")
+    VAT_NUMBER = (By.NAME,"vatRegistrationNumber")
     FORM_ERROR_MESSAGE = (By.CSS_SELECTOR, "p.text-red-500")
 
     def __init__(self, driver):
