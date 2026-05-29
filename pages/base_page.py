@@ -14,7 +14,7 @@ class BasePage:
     # OVERLAY = (By.XPATH, "//div[contains(@class,'backdrop-blur-sm') and contains(@class,'opacity-100')]")
     def __init__(self,driver):
         self.driver = driver
-        self.wait = WebDriverWait(driver,15)
+        self.wait = WebDriverWait(driver, 30)
     
     def find_element(self,locator):
         return self.wait.until(EC.presence_of_element_located(locator))
@@ -28,7 +28,7 @@ class BasePage:
     def enter_text(self, locator, text):
         for attempt in range(3):  # retry up to 3 times
             try:
-                element = self.find_element(locator)
+                element = self.find_clickable_element(locator)
                 self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
                 element.click()
                 element.clear()
