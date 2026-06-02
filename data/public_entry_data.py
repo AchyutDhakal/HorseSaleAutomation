@@ -424,9 +424,9 @@ INVALID_VENDOR_DETAILS = [
         "business_name":"ghoda enterprises",
         "eq_number":"1564848",
         "flat_farmer":"No",
-        "vat_farmer":"Yes",
-        "pps_number":"feawfeawfe",
-        "vat_number":"fjdkds",
+        "vat_farmer":"No",
+        "pps_number":"",
+        "vat_number":"",
         "county":"",
         "country":""
     },

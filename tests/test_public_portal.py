@@ -139,10 +139,8 @@ class TestPublicPortal:
             self.public_portal.enter_text(self.public_portal.BUSINESS_NAME, invalid_vendor["business_name"])
             
             if(invalid_vendor["flat_farmer"]=="Yes"):
-                time.sleep(10)
                 self.public_portal.click_element(self.public_portal.FLAT_RATED_YES)
                 self.public_portal.enter_text(self.public_portal.PPS_NUMBER,invalid_vendor["pps_number"])
-                time.sleep(10)
 
             if (invalid_vendor["vat_farmer"]=="Yes"):
                 self.public_portal.click_element(self.public_portal.VAT_REGISTERED_YES)
