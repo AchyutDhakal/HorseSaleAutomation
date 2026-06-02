@@ -39,6 +39,7 @@ class RegisterEntry(BasePage):
 
 
     def register_entry(self):
+        self.wait.until(EC.visibility_of_element_located(self.SALES))
         self.click_element(self.SALES)
         self.wait.until(EC.presence_of_element_located(self.EVENT_NAME))
         self.wait.until(EC.element_to_be_clickable(self.EVENT_NAME))

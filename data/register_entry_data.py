@@ -214,7 +214,7 @@ ENTRY_DATA = [
 ]
 
 INVALID_ENTRY_DATA =[
-    {   
+    {
         "vendorId": None,
         "horse.registrationNumber":"12548587866",
         "HorseName":"random",
@@ -379,7 +379,8 @@ INVALID_ENTRY_DATA =[
         "disease_test":"No",
         "Select year": "2025"
     },
-    {
+    {   
+        "sectionCategory": "Connemara",
         "horse.registrationNumber":12548587866,
         "HorseName":"testHorse",
         "DateOfBirth": past_date,
