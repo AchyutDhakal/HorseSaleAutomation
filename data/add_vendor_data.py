@@ -26,7 +26,7 @@ INVALID_VENDOR_DATA = [
         "equinePremisesNumber":164551592626,
         "formal_title":"",
         "county":"",
-        "country":"",
+        "country": None,
         "flat_farmer":"No",
         "vat_farmer":"No",
         "vat_number":"",

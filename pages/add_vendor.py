@@ -15,8 +15,8 @@ class AddVendor(BasePage):
     COUNTY_DROPDOWN = (By.XPATH,"//span[normalize-space()='Select county']")
     COUNTY = (By.XPATH,"//span[normalize-space()='Antrim']")
     POSTCODE_INPUT = (By.NAME,"postcode")
-    COUNTRY_DROPDOWN = (By.XPATH,"//span[normalize-space()='Select country']")
-    COUNTRY = (By.XPATH,"//span[normalize-space()='Ireland']")
+    COUNTRY_DROPDOWN = (By.XPATH,"//span[normalize-space()='Ireland']")
+    COUNTRY = (By.XPATH,"//div[normalize-space()='Select country']")
     EQUINE_PREMISES_NUMBER_INPUT = (By.NAME,"equinePremisesNumber")
     FLAT_RATED_FARMER_NO = (By.XPATH,"//label[normalize-space()='No']/input[@name='flatRatedFarmer']")
     VAT_REGISTERED_FARMER_NO = (By.XPATH,"//label[normalize-space()='No']/input[@name='vatRegisteredFarmer']")
@@ -41,8 +41,8 @@ class AddVendor(BasePage):
         self.click_element(self.FORMAL_TITLE)
         self.click_element(self.COUNTY_DROPDOWN)
         self.click_element(self.COUNTY)
-        self.click_element(self.COUNTRY_DROPDOWN)
-        self.click_element(self.COUNTRY)
+        # self.click_element(self.COUNTRY_DROPDOWN)
+        # self.click_element(self.COUNTRY)
         self.click_element(self.FLAT_RATED_FARMER_NO)
         self.click_element(self.VAT_REGISTERED_FARMER_NO)
 
@@ -59,7 +59,7 @@ class AddVendor(BasePage):
             self.click_element(self.COUNTY_DROPDOWN)
             self.click_element(self.COUNTY)
 
-        if country is not None:
+        if country is None:
             self.click_element(self.COUNTRY_DROPDOWN)
             self.click_element(self.COUNTRY)
 
