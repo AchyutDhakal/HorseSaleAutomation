@@ -44,7 +44,7 @@ class PublicPortal(BasePage):
     CVV_INPUT = (By.XPATH,"//input[@placeholder='123']")
     FINALIZE_ENTRY_BUTTON = (By.XPATH,"//button[contains(normalize-space(),'Finalise entry')]")
     OTP_INPUT = (By.ID,"otp")
-    EMAIL_OTP_INPUTS = (By.CSS_SELECTOR, "input[maxlength='1'][inputmode='numeric']")
+    EMAIL_OTP_INPUTS = (By.CSS_SELECTOR, "div.justify-between > input[inputmode='numeric']")
     HEIGHT = "horses[0].horse.height"
     AGE = "horses[0].horse.age"
     VERIFY_AND_CONTINUE_BUTTON = (By.ID,"verify-btn")
