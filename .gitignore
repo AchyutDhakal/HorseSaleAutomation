@@ -18,3 +18,5 @@ venv/
 *.msi
 *.tgz
 *.zip
+
+utils/api_practice.py

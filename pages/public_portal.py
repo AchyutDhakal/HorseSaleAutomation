@@ -95,6 +95,7 @@ class PublicPortal(BasePage):
         self.click_element(self.VERIFY_CODE_BUTTON)
 
     def fill_mobile_number(self, mobile_number):
+        self.wait.until(EC.element_to_be_clickable(self.NEXT_STEP_BUTTON))
         self.enter_text(self.MOBILE_NUMBER_INPUT, mobile_number)
         self.click_element(self.NEXT_STEP_BUTTON)
 
