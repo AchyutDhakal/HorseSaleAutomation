@@ -97,7 +97,7 @@ class PublicPortal(BasePage):
     def fill_mobile_number(self, mobile_number):
         self.wait.until(EC.element_to_be_clickable(self.NEXT_STEP_BUTTON))
         self.enter_text(self.MOBILE_NUMBER_INPUT, mobile_number)
-        self.click_element(self.NEXT_STEP_BUTTON)a
+        self.click_element(self.NEXT_STEP_BUTTON)
 
         
     def fill_vendor_details(self, first_name, last_name, address, town, postcode, eq_number, formal_title, county, country):
