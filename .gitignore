@@ -20,3 +20,5 @@ venv/
 *.zip
 
 utils/api_practice.py
+utils/test_api.json
+utils/order_history.json

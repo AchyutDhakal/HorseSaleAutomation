@@ -11,7 +11,7 @@ class PublicPortal(BasePage):
     CONTINUE_BUTTON =(By.XPATH,"//button[normalize-space()='Continue']")
     EMAIL_INPUT = (By.XPATH,"//input[@type='email']")
     VERIFY_CODE_BUTTON = (By.XPATH,"//button[normalize-space()='Verify']")
-    MOBILE_NUMBER_INPUT = (By.XPATH,"//input[@placeholder='87 123 4567']")
+    MOBILE_NUMBER_INPUT = (By.CSS_SELECTOR,"input[type='tel']")
     NEXT_STEP_BUTTON = (By.XPATH,"//button[normalize-space()='Next step']")
     FORMAL_TITLE_DROPDOWN = (By.XPATH,"//label[.//span[contains(text(),'Formal title')]]//following-sibling::button")
     FORMAL_TITLE = (By.XPATH,"//button[normalize-space()='Mr.']")
@@ -97,7 +97,7 @@ class PublicPortal(BasePage):
     def fill_mobile_number(self, mobile_number):
         self.wait.until(EC.element_to_be_clickable(self.NEXT_STEP_BUTTON))
         self.enter_text(self.MOBILE_NUMBER_INPUT, mobile_number)
-        self.click_element(self.NEXT_STEP_BUTTON)
+        self.click_element(self.NEXT_STEP_BUTTON)a
 
         
     def fill_vendor_details(self, first_name, last_name, address, town, postcode, eq_number, formal_title, county, country):
