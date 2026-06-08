@@ -19,8 +19,13 @@ class TestPublicPortal:
         self.login_page = LoginPage(self.driver)
         self.register_entry = RegisterEntry(self.driver)
 
+    @pytest.fixture(autouse=True)
     def teardown_method(self):
-        self.driver.quit()
+        yield
+        try:
+            self.driver.quit()
+        except Exception:
+            pass
 
     @allure.title("Testing registering a horse entry through public portal using valid data")
     @pytest.mark.parametrize("entry_data", VALID_PUBLIC_PORTAL)
