@@ -51,6 +51,8 @@ class TestPublicPortal:
 
         with allure.step("Filling up horse details"):
             self.public_portal.fill_form_dynamically(entry_data)
+            self.public_portal.click_element(self.public_portal.BREEDING_RECORDED_BUTTON)
+            self.public_portal.click_element(self.public_portal.REGISTERED_THROUGHBRED_BUTTON)
             self.public_portal.click_element(self.public_portal.NEXT_STEP_BUTTON)
             self.public_portal.click_element(self.public_portal.NEXT_STEP_BUTTON)
 
@@ -178,6 +180,8 @@ class TestPublicPortal:
 
         with allure.step("Filling up horse details"):
             self.public_portal.fill_form_dynamically(invalid_horse)
+            self.public_portal.click_element(self.public_portal.BREEDING_RECORDED_BUTTON)
+            self.public_portal.click_element(self.public_portal.REGISTERED_THROUGHBRED_BUTTON)
             self.public_portal.click_element(self.public_portal.NEXT_STEP_BUTTON)
         
         with allure.step("Assertion"):

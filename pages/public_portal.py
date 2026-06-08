@@ -12,7 +12,7 @@ class PublicPortal(BasePage):
     EMAIL_INPUT = (By.XPATH,"//input[@type='email']")
     VERIFY_CODE_BUTTON = (By.XPATH,"//button[normalize-space()='Verify']")
     MOBILE_NUMBER_INPUT = (By.CSS_SELECTOR,"input[type='tel']")
-    NEXT_STEP_BUTTON = (By.XPATH,"//button[normalize-space()='Next step']")
+    NEXT_STEP_BUTTON = (By.XPATH,"//button[contains(.,'Next step') and .//*[local-name()='svg' and contains(@class,'lucide-arrow-right')]]")
     FORMAL_TITLE_DROPDOWN = (By.XPATH,"//label[.//span[contains(text(),'Formal title')]]//following-sibling::button")
     FORMAL_TITLE = (By.XPATH,"//button[normalize-space()='Mr.']")
     FIRST_NAME_INPUT = (By.XPATH,"//input[@placeholder='First name  ']")
@@ -70,6 +70,8 @@ class PublicPortal(BasePage):
     VAT_REGISTERED_YES = (By.CSS_SELECTOR,"input[name='vat_farm'][value='yes']")
     COMPLETE_LATER_BUTTON = (By.XPATH,"//button[normalize-space()='Complete Later']")
     DISCLAIMER = (By.XPATH,"//h4[text()='Disclaimer']")
+    BREEDING_RECORDED_BUTTON = (By.XPATH,"(//button[normalize-space()='No'])[2]")
+    REGISTERED_THROUGHBRED_BUTTON = (By.XPATH,"(//button[normalize-space()='No'])[3]")
 
 
 
