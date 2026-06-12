@@ -11,6 +11,7 @@ def create_driver():
     options.add_argument("--window-size=1920,1080")
     options.add_argument("--disable-extensions")
     options.add_argument("--disable-password-manager-reauthentication")
+    options.add_argument("--start-maximized")
     
     # Unique profile per run — prevents profile lock conflicts
     tmpdir = tempfile.mkdtemp()

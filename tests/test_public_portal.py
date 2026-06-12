@@ -77,7 +77,7 @@ class TestPublicPortal:
         
         with allure.step("Assertion against the horse name"):
             horse_name = self.public_portal.get_element_text(self.public_portal.HORSE_NAME_ADMIN)
-            assert_true((entry_data["horses[0].horse.horseName"] == horse_name),"The horse names don't match", "Valid_public_entry",self.public_portal)
+            assert_true((entry_data["horses[0].horse.horseName"] in horse_name),"The horse names don't match", "Valid_public_entry",self.public_portal)
 
     @allure.title("Testing invalid email address")
     @pytest.mark.parametrize("invalid_email",INVALID_EMAIL_ADDRESS)

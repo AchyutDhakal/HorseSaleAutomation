@@ -51,7 +51,7 @@ class PublicPortal(BasePage):
     PAYMENT_WINDOW_LOCATOR = (By.XPATH,"//iframe")
     RETURN_TO_HOMEPAGE_BUTTON = (By.XPATH,"//a[normalize-space()='Return to Homepage']")
     ENTRY = (By.XPATH,"//table//tbody/tr[1]")
-    HORSE_NAME_ADMIN = (By.XPATH,"//table//tbody/tr[1]//td[6]//span[contains(@class,'font-semibold')]")
+    HORSE_NAME_ADMIN = (By.XPATH,"//table//tbody/tr[1]//td[7]//span[contains(@class,'font-semibold')]")
     POPUP_DISMISS_BUTTON = (By.XPATH, "//button[normalize-space()='No thanks']")
     POPUP_OVERLAY = (By.CSS_SELECTOR, "div.absolute.inset-0")
     ENTRY_STATUS = (By.XPATH,"(//div[.//span[normalize-space()='Entry status']]//span[last()])[2]")
