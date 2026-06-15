@@ -95,6 +95,7 @@ class PublicPortal(BasePage):
     def fill_otp(self):
         self.enter_otp(self.EMAIL_OTP_INPUTS,get_otp_from_email())
         self.click_element(self.VERIFY_CODE_BUTTON)
+        self.wait.until(EC.invisibility_of_element_located(self.EMAIL_OTP_INPUTS))
 
     def fill_mobile_number(self, mobile_number):
         self.wait.until(EC.element_to_be_clickable(self.NEXT_STEP_BUTTON))
