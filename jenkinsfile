@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    environment{
+        EMAIL_ADDRESS = credentials('email-address')
+        EMAIL_PASSWORD = credentials('email-password')
+        ADMIN_EMAIL= credentials('admin-email')
+        ADMIN_PASSWORD= credentials('admin-password')
+        BASE_URL=https: credentials('base-url')
+        CARD_NUMBER= credentials('card-number')
+        EXPIRY_MONTH= credentials('expiry-month')
+        EXPIRY_YEAR= credentials('expiry-year')
+        CVV= credentials('cvv')
+    }
+
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip3 install -r requirements.txt'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'python3 -m pytest'
+            }
+        }
+    }
+}
