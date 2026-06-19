@@ -6,7 +6,7 @@ pipeline {
         EMAIL_PASSWORD = credentials('email-password')
         ADMIN_EMAIL= credentials('admin-email')
         ADMIN_PASSWORD= credentials('admin-password')
-        BASE_URL=https: credentials('base-url')
+        BASE_URL= credentials('base-url')
         CARD_NUMBER= credentials('card-number')
         EXPIRY_MONTH= credentials('expiry-month')
         EXPIRY_YEAR= credentials('expiry-year')
