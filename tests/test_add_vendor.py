@@ -2,7 +2,7 @@ from utils.test_runner import create_driver
 from config import BASE_URL
 from pages.login_page import LoginPage
 from pages.add_vendor import AddVendor
-import allure 
+import allure
 import pytest
 from data.add_vendor_data import VENDOR_DATA, INVALID_VENDOR_DATA
 from data.login_data import VALID_DATA
@@ -45,7 +45,7 @@ class TestAddVendor:
                 lambda d: d.find_element(*self.add_vendor.MOBILE_NUMBER).text not in ['-', '', None]
             )
             actual_mobile_number = self.add_vendor.get_element_text(self.add_vendor.MOBILE_NUMBER)
-            expected_mobile_number = "+353"+" "+f"{vendor_data["mobileNumber"]}"
+            expected_mobile_number = "+353"+" "+f"{vendor_data['mobileNumber']}"
             assert_equal(actual_mobile_number, expected_mobile_number, "The mobile numbers doesn't match","valid_add_vendor",self.add_vendor)
 
 

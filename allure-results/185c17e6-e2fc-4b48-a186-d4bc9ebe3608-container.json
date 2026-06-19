@@ -1,0 +1,1 @@
+{"uuid": "3e92794a-4be1-4698-b5df-e2de17e6c65a", "befores": [{"name": "invalid_vendor", "status": "passed", "start": 1781853885897, "stop": 1781853885897}], "afters": [{"name": "invalid_vendor::<lambda>", "start": 1781853911426}], "start": 1781853885897, "stop": 1781853911426}

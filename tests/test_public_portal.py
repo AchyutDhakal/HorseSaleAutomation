@@ -49,7 +49,7 @@ class TestPublicPortal:
         with allure.step("Filling up vendor details"):
             self.public_portal.fill_vendor_details(entry_data["firstName"], entry_data["lastName"], entry_data["address.addressLine1"], entry_data["address.townCity"], entry_data["address.postcode"], entry_data["equinePremisesNumber"], entry_data["formal_title"], entry_data["county"], entry_data["country"])
             self.public_portal.click_element(self.public_portal.NEXT_STEP_BUTTON)
-   
+
         with allure.step("Clicking on upload documents later"):
             self.public_portal.click_element(self.public_portal.DOCUMENT_LATER)
             self.public_portal.click_element(self.public_portal.COMPLETE_LATER_BUTTON)
@@ -62,7 +62,7 @@ class TestPublicPortal:
             self.public_portal.click_element(self.public_portal.NEXT_STEP_BUTTON)
 
         with allure.step("Filling up card details and clicking privacy policy checkboxes"):
-            self.public_portal.fill_card_details(entry_data["card_name"])            
+            self.public_portal.fill_card_details(entry_data["card_name"])
 
         with allure.step("Asserting entry finalization"):
             entry_status = self.public_portal.get_element_text(self.public_portal.ENTRY_STATUS)
@@ -74,7 +74,7 @@ class TestPublicPortal:
 
         with allure.step("Going the sales event"):
             self.public_portal.navigate_to_admin_sales()
-        
+
         with allure.step("Assertion against the horse name"):
             horse_name = self.public_portal.get_element_text(self.public_portal.HORSE_NAME_ADMIN)
             assert_true((entry_data["horses[0].horse.horseName"] in horse_name),"The horse names don't match", "Valid_public_entry",self.public_portal)
@@ -119,7 +119,7 @@ class TestPublicPortal:
                 assert_true(self.public_portal.is_element_visible(self.public_portal.INVALID_PHONE_ERROR),"No error message displayed for invalid mobile number","invalid_mobile_number", self.public_portal)
 
             else:
-                assert_true(self.public_portal.is_element_visible(self.public_portal.INVALID_PHONE_ERROR),f"No error message displayed for invalid mobile number '{invalid_mobile["mobile_number"]}'","invalid_mobile_number", self.public_portal)
+                assert_true(self.public_portal.is_element_visible(self.public_portal.INVALID_PHONE_ERROR),f"No error message displayed for invalid mobile number {invalid_mobile['mobile_number']}","invalid_mobile_number", self.public_portal)
 
 
     @allure.title("Testing the invalid vendor details")
@@ -144,7 +144,7 @@ class TestPublicPortal:
             self.public_portal.fill_vendor_details(invalid_vendor["first_name"], invalid_vendor["last_name"], invalid_vendor["address_1"], invalid_vendor["town"], invalid_vendor["postcode"], invalid_vendor["eq_number"], invalid_vendor["formal_title"], invalid_vendor["county"], invalid_vendor["country"])
             self.public_portal.enter_text(self.public_portal.ADDRESS_LINE_2,invalid_vendor["address_2"])
             self.public_portal.enter_text(self.public_portal.BUSINESS_NAME, invalid_vendor["business_name"])
-            
+
             if(invalid_vendor["flat_farmer"]=="Yes"):
                 self.public_portal.click_element(self.public_portal.FLAT_RATED_YES)
                 self.public_portal.enter_text(self.public_portal.PPS_NUMBER,invalid_vendor["pps_number"])
@@ -178,7 +178,7 @@ class TestPublicPortal:
         with allure.step("Filling up vendor details"):
             self.public_portal.fill_vendor_details(invalid_horse["firstName"], invalid_horse["lastName"], invalid_horse["address.addressLine1"], invalid_horse["address.townCity"], invalid_horse["address.postcode"], invalid_horse["equinePremisesNumber"], invalid_horse["formal_title"], invalid_horse["county"], invalid_horse["country"])
             self.public_portal.click_element(self.public_portal.NEXT_STEP_BUTTON)
-   
+
         with allure.step("Clicking on upload documents later"):
             self.public_portal.click_element(self.public_portal.DOCUMENT_LATER)
             self.public_portal.click_element(self.public_portal.COMPLETE_LATER_BUTTON)
@@ -188,7 +188,7 @@ class TestPublicPortal:
             self.public_portal.click_element(self.public_portal.BREEDING_RECORDED_BUTTON)
             self.public_portal.click_element(self.public_portal.REGISTERED_THROUGHBRED_BUTTON)
             self.public_portal.click_element(self.public_portal.NEXT_STEP_BUTTON)
-        
+
         with allure.step("Assertion"):
             assert_false(self.public_portal.is_element_present(self.public_portal.DISCLAIMER), "Invalid horse data allowed", "invalid_horse_details", self.public_portal )
 
