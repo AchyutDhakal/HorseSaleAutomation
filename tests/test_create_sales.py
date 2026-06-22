@@ -6,13 +6,14 @@ import pytest
 from data.sales_data import SALES_DATA
 from data.login_data import VALID_DATA
 from utils.assertions import assert_true, assert_false
+from selenium.webdriver.support import expected_conditions as EC
 import time
 
 class TestCreateSales:
     def setup_method(self):
         self.driver = create_driver()
         self.driver.get("https://horse-sale-app.vercel.app/login")
-        
+
         self.create_sales_page = CreateSalesPage(self.driver)
         self.login_page = LoginPage(self.driver)
 
@@ -31,6 +32,6 @@ class TestCreateSales:
 
         with allure.step("Assertion"):
             event_text = self.create_sales_page.get_element_text(self.create_sales_page.EVENT_TITLE).lower()
+
             assert_false(self.create_sales_page.is_element_present(self.create_sales_page.INITIALIZE_SALE),"Initialize sales button still present","sales_event_creation",self.create_sales_page)
-            assert_true(sales_data["event_name"].lower()==event_text,"The name of the event didn't match","sales_event_creation", self.create_sales_page)  
-        
+            assert_true(sales_data["event_name"].lower()==event_text,"The name of the event didn't match","sales_event_creation", self.create_sales_page)

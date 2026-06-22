@@ -15,16 +15,16 @@ class BasePage:
         self.driver = driver
         timeout = 60 if os.environ.get("JENKINS_URL") else 10
         self.wait = WebDriverWait(driver, timeout)
-    
+
     def find_element(self,locator):
         return self.wait.until(EC.presence_of_element_located(locator))
-    
+
     def find_clickable_element(self,locator):
         return self.wait.until(EC.element_to_be_clickable(locator))
-    
+
     def find_visible_element(self,locator):
         return self.wait.until(EC.visibility_of_element_located(locator))
-    
+
     def enter_text(self, locator, text):
         for attempt in range(3):  # retry up to 3 times
             try:
@@ -47,28 +47,28 @@ class BasePage:
     def get_element_text(self,locator):
         element = self.find_element(locator)
         return element.text
-    
+
     def is_element_present(self,locator):
         try:
             self.find_element(locator)
             return True
         except TimeoutException:
             return False
-        
+
     def is_element_clickable(self,locator):
         try:
             self.find_clickable_element(locator)
             return True
         except TimeoutException:
             return False
-        
+
     def is_element_visible(self, locator):
         try:
             self.find_visible_element(locator)
             return True
         except TimeoutException:
             return False
-        
+
     def take_screenshot(self, name):
         screenshots_dir = "Screenshots"
 
@@ -88,13 +88,17 @@ class BasePage:
 
     def enter_date(self, locator, date):
         element = self.find_element(locator)
-        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
-        element.click()
-        element.send_keys(Keys.CONTROL + "a")
-        element.send_keys(Keys.DELETE)
-        date_parts = date.split("-")  
-        formatted = date_parts[1] + date_parts[2] + date_parts[0]  
-        element.send_keys(formatted)
+        self.driver.execute_script(
+            "arguments[0].scrollIntoView({block: 'center'});", element
+        )
+        # JS setter is reliable across all platforms and headless
+        self.driver.execute_script("""
+            var setter = Object.getOwnPropertyDescriptor(
+                window.HTMLInputElement.prototype, 'value').set;
+            setter.call(arguments[0], arguments[1]);
+            arguments[0].dispatchEvent(new Event('input', {bubbles: true}));
+            arguments[0].dispatchEvent(new Event('change', {bubbles: true}));
+        """, element, date)
         element.send_keys(Keys.TAB)
 
     def select_custom_dropdown(self, name, text):
@@ -102,7 +106,7 @@ class BasePage:
         WebDriverWait(self.driver, 10).until(
             lambda d: len(d.find_element(By.NAME, name).find_elements(By.TAG_NAME, "option")) > 1
         )
-        
+
         select_el = self.find_element(select_locator)
         value = self.driver.execute_script("""
             var select = arguments[0];
@@ -138,7 +142,7 @@ class BasePage:
             if (options.length === 0) return null;
             return options[arguments[1]].text.trim();
         """, select_element, index)
-    
+
     def enter_otp(self, locator, otp):
         otp_inputs = self.driver.find_elements(*locator)
         for i, digit in enumerate(str(otp)):
@@ -172,7 +176,7 @@ class BasePage:
             switched = False
             for iframe in iframes:
                 if iframe.is_displayed():
-                    self.driver.switch_to.frame(iframe)  
+                    self.driver.switch_to.frame(iframe)
                     switched = True
                     break
 
@@ -202,18 +206,18 @@ class BasePage:
     def select_all_section_categories(self, dropdown_locator, options_locator):
         # Open the dropdown first
         self.click_element(dropdown_locator)
-        
+
         # Wait for options to appear
         self.wait.until(
             EC.presence_of_element_located(options_locator)
         )
-        
+
         # Get all option divs and click each one
         options = self.driver.find_elements(*options_locator)
         for option in options:
             self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", option)
             option.click()
-        
+
         # Close dropdown by clicking outside
         self.driver.find_element(By.TAG_NAME, "body").click()
 
@@ -262,12 +266,12 @@ class BasePage:
     def _fill_dropdowns(self, form_data: dict):
         # Get dropdown names first, then select one by one
         # Re-finding after each selection to avoid stale references
-        
+
         processed = set()  # track already processed dropdowns
-        
+
         while True:
             selects = self.driver.find_elements(By.XPATH, "//select[@class='sr-only']")
-            
+
             # Find first unprocessed dropdown
             found_new = False
             for select in selects:
