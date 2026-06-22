@@ -22,7 +22,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh 'python3 -m pytest'
+                sh 'python3 -m pytest --alluredir=allure-results --clean-alluredir'
             }
         }
     }
